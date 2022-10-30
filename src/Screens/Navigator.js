@@ -112,8 +112,8 @@ export const AppNavigator = () => {
       // sendTokenToServer(event.deviceToken);
       // console.log('Device Token Received', event.deviceToken);
 
-      dispatch(setDeviceToken(event.deviceToken));
-      dispatch(reloadUser(event.deviceToken));
+      // dispatch(setDeviceToken(event.deviceToken));
+      // dispatch(reloadUser(event.deviceToken));
     });
     Notifications.events().registerRemoteNotificationsRegistrationFailed(
       event => {
@@ -138,9 +138,10 @@ export const AppNavigator = () => {
     );
   }, []);
 
-  if (auth.user === undefined) {
-    return <></>;
-  }
+  // if (auth.user === undefined) {
+  //   return <></>;
+  // }
+
   // if (auth.user?.id) {
   //   return (
   //     <NavigationContainer>

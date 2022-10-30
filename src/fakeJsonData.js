@@ -31,6 +31,20 @@ export const games = [
     image: "",
     downloads: 2111
   },
+  {
+    id: 4,
+    title: "Super Mario Bros",
+    system: "NES",
+    image: "",
+    downloads: 2111
+  },
+  {
+    id: 4,
+    title: "Super Mario Bros",
+    system: "NES",
+    image: "",
+    downloads: 2111
+  },
 ]
 export const surveysData = [
   {

@@ -67,10 +67,11 @@ export const homeIcon = props => (
 );
 
 export const CoinsComponent = props => {
-  const balance = useSelector(state => state.auth.user.balance);
+  // const balance = useSelector(state => state.auth.user.balance);
+  const balance = 20;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(reloadUser());
+    //dispatch(reloadUser());
   }, []);
   return (
     <TouchableOpacity onPress={() => dispatch(reloadUser())}>
@@ -99,7 +100,7 @@ export const NotificationIcon = props => {
   );
 
   useEffect(() => {
-    dispatch(fetchNotifications(0));
+    //dispatch(fetchNotifications(0));
   }, []);
   return (
     <Animatable.View animation="swing" easing="ease-out" iterationCount={3}>
@@ -229,23 +230,20 @@ export const HomeScreen = ({ navigation }) => {
           autoPlay={true}
           width={Dimensions.get('screen').width}
           autoPlayInterval={3000}
-          height={115}
+
           data={games}
-          style={{
-            width: '100%',
-            marginVertical: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+
           renderItem={({ item, index }) => (
             <View
               style={{
-                padding: 0,
+                padding: 10,
                 margin: 0,
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
+
+
               }}>
               <GameItem key={index} data={item} />
             </View>
@@ -257,7 +255,7 @@ export const HomeScreen = ({ navigation }) => {
           {surveys != null &&
             surveys.map(survey => <WideSurvey data={survey} />)}
         </View> */}
-        <View>
+        {/* <View>
           <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
             <Text>Refer friend and earn</Text>
             <View style={{ marginVertical: 2 }}>
@@ -280,7 +278,7 @@ export const HomeScreen = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </Card>
-        </View>
+        </View> */}
         <TouchableOpacity>
           <View
             style={{
@@ -297,9 +295,10 @@ export const HomeScreen = ({ navigation }) => {
       </ScrollView>
     );
   };
+  const numColumns = Math.ceil(games.length / 2);
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
+      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'], }}>
       <TopNavigation
         title="Dashboard"
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
@@ -307,15 +306,24 @@ export const HomeScreen = ({ navigation }) => {
       <Divider />
       {/* <Congratulation /> */}
 
+
+
       <FlatList
+
+
         data={games}
         keyExtractor={(item, index) => index}
-        renderItem={({ item, index }) => <GameItem data={item} key={index} />}
-        numColumns={4}
+        renderItem={({ item, index }) =>
+          <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
+            <GameItem data={item} key={index} />
+          </View>
+        }
+        numColumns={2}
         ListHeaderComponent={HomeScreenHeaderComponent}
       // onEndReached={() => getOffers(offset)}
       // onEndReachedThreshold={0.1}
       />
+
       {/* <View
           style={{
             flexDirection: 'row',

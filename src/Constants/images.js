@@ -18,3 +18,4 @@ export const facebook = require('../Screens/images/facebook.png');
 export const twitter = require('../Screens/images/twitter.png');
 export const instagram = require('../Screens/images/instagram.png');
 export const congratulation = require('../Screens/images/congratulation.png');
+export const smb3 = require('../Screens/images/smb3.jpg');
