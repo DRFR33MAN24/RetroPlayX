@@ -22,6 +22,7 @@ import {
   faDesktop,
   faFighterJet,
 } from '@fortawesome/free-solid-svg-icons';
+
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {
   SafeAreaView,
