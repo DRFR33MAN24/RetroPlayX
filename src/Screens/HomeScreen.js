@@ -210,7 +210,36 @@ export const HomeScreen = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginVertical: appStyles.s12,
+          }}>
+          <TouchableOpacity
+            style={{
+              width: appStyles.s30 * 3,
+              height: appStyles.s30 * 3,
+              padding: appStyles.s12,
+              borderRadius: appStyles.s30 * 3,
+              backgroundColor: theme['color-primary-300'],
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <FontAwesomeIcon icon={faChevronRight} size={20} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: appStyles.s30 * 3,
+              height: appStyles.s30 * 3,
+              padding: appStyles.s12,
+              borderRadius: appStyles.s30 * 3,
+              backgroundColor: theme['color-primary-300'],
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <FontAwesomeIcon icon={faChevronRight} size={20} />
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               width: appStyles.s30 * 3,
