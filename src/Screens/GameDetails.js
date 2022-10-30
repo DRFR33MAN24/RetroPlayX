@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 
 import {BackIcon} from '../Components/NavigationComponents';
+import Carousel from 'react-native-reanimated-carousel';
 import {appStyles} from '../Constants/style';
 
 export const GameDetails = ({navigation, route}) => {
@@ -43,7 +44,7 @@ export const GameDetails = ({navigation, route}) => {
       style={{
         borderWidth: 1,
         height: '100%',
-        borderColor: theme['text-basic-color'],
+        borderColor: theme['text-hint-color'],
       }}></View>
   );
 
@@ -68,7 +69,10 @@ export const GameDetails = ({navigation, route}) => {
             resizeMode="stretch"
             style={{width: 64, height: 64, borderRadius: appStyles.s12}}
           />
-          <Text category="h2">{title}</Text>
+          <View>
+            <Text category="h2">{title}</Text>
+            <Text appearance="hint">{size}MB</Text>
+          </View>
         </View>
         <View
           style={{
@@ -101,10 +105,47 @@ export const GameDetails = ({navigation, route}) => {
           </View>
         </View>
         <Button size="small">Install</Button>
-        <Image
+        {/* <Image
           source={{uri: image}}
           resizeMode="stretch"
           style={{width: '100%', height: 200, marginVertical: appStyles.s12}}
+        /> */}
+        <Carousel
+          // mode="horizontal-stack"
+          // modeConfig={{
+          //   snapDirection: 'left',
+          //   stackInterval: 18,
+          // }}
+          autoPlay={false}
+          width={Dimensions.get('screen').width}
+          height={250}
+          style={{marginVertical: appStyles.s12}}
+          autoPlayInterval={3000}
+          data={[image]}
+          renderItem={({item, index}) => (
+            <View
+              style={{
+                padding: 0,
+                margin: 0,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '30%',
+                height: 200,
+              }}>
+              <Image
+                key={index}
+                source={{uri: item}}
+                resizeMode="cover"
+                style={{
+                  width: '100%',
+                  height: 200,
+                  marginVertical: appStyles.s12,
+                  borderRadius: appStyles.s6,
+                }}
+              />
+            </View>
+          )}
         />
         <View style={{paddingHorizontal: 10}}>
           <Text>About Game:</Text>
