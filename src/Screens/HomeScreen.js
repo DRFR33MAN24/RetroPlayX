@@ -18,6 +18,9 @@ import {
   faGift,
   faChevronRight,
   faStore,
+  faFilter,
+  faDesktop,
+  faFighterJet,
 } from '@fortawesome/free-solid-svg-icons';
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {
@@ -226,7 +229,7 @@ export const HomeScreen = ({navigation}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faChevronRight} size={20} />
+            <FontAwesomeIcon icon={faFilter} size={35} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -238,7 +241,7 @@ export const HomeScreen = ({navigation}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faChevronRight} size={20} />
+            <FontAwesomeIcon icon={faDesktop} size={35} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -250,7 +253,7 @@ export const HomeScreen = ({navigation}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faChevronRight} size={20} />
+            <FontAwesomeIcon icon={faFighterJet} size={35} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity>
