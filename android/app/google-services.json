@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "925475123534",
+    "project_id": "earnmaster-f5ea8",
+    "storage_bucket": "earnmaster-f5ea8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925475123534:android:c36fef9fc56b40e576ee1f",
+        "android_client_info": {
+          "package_name": "com.retroplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925475123534-5d89mvkr8capeu8semj28lnnhc8toqbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.retroplay",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "925475123534-2058vfrc7pft57hn27e7gkq6bohi09er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ6j7WjDUm170is0BfWXkIEsxXhcCCtA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925475123534-2058vfrc7pft57hn27e7gkq6bohi09er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
