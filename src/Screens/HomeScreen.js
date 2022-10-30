@@ -213,9 +213,13 @@ export const HomeScreen = ({navigation}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity
             style={{
-              width: appStyles.s18,
-              borderRadius: appStyles.s18,
+              width: appStyles.s30 * 3,
+              height: appStyles.s30 * 3,
+              padding: appStyles.s12,
+              borderRadius: appStyles.s30 * 3,
               backgroundColor: theme['color-primary-300'],
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
             <FontAwesomeIcon icon={faChevronRight} size={20} />
           </TouchableOpacity>
