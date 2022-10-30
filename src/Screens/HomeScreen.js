@@ -17,6 +17,7 @@ import {
   faChevronLeft,
   faGift,
   faChevronRight,
+  faStore
 } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
@@ -49,6 +50,7 @@ import { surveysData } from '../fakeJsonData';
 import { Survey, WideSurvey, WideSurvey2 } from '../Components/Survey';
 import { Congratulation } from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOffers } from '../Reducers/offersSlice';
@@ -60,7 +62,7 @@ import GameItem from '../Components/GameItem';
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
-    icon={faHome}
+    icon={faStore}
     size={25}
     style={{ color: props.style.tintColor }}
   />
@@ -217,38 +219,41 @@ export const HomeScreen = ({ navigation }) => {
               paddingHorizontal: 10,
               marginVertical: 10,
             }}>
-            <Text category="h5">Featured Offers</Text>
+            <Text category="h5">Featured Games</Text>
             <FontAwesomeIcon icon={faChevronRight} size={20} />
           </View>
         </TouchableOpacity>
-        <Carousel
-          // mode="horizontal-stack"
-          // modeConfig={{
-          //   snapDirection: 'left',
-          //   stackInterval: 18,
-          // }}
-          autoPlay={true}
-          width={Dimensions.get('screen').width}
-          autoPlayInterval={3000}
+        <GestureHandlerRootView>
 
-          data={games}
+          <Carousel
+            // mode="horizontal-stack"
+            // modeConfig={{
+            //   snapDirection: 'left',
+            //   stackInterval: 18,
+            // }}
+            autoPlay={true}
+            width={Dimensions.get('screen').width}
+            autoPlayInterval={3000}
 
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                padding: 10,
-                margin: 0,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
+            data={games}
+
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  padding: 10,
+                  margin: 0,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
 
 
-              }}>
-              <GameItem key={index} data={item} />
-            </View>
-          )}
-        />
+                }}>
+                <GameItem key={index} data={item} />
+              </View>
+            )}
+          />
+        </GestureHandlerRootView>
         <DailyGoals />
 
         {/* <View style={{marginHorizontal: 10}}>
@@ -300,7 +305,7 @@ export const HomeScreen = ({ navigation }) => {
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme['background-basic-color-4'], }}>
       <TopNavigation
-        title="Dashboard"
+        title="Retro Play"
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
       />
       <Divider />

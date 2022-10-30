@@ -6,45 +6,59 @@ export const games = [
   {
     id: 1,
     title: "Super Mario Bros",
+    details: "Super Mario is a platform game series created by Nintendo starring their mascot, Mario. Alternatively called the Super Mario Bros. series or simply the Mario series, it is the central series of the greater Mario franchise. At least one Super Mario game has been released for every major Nintendo video game console ",
     system: "NES",
-    image: "",
-    downloads: 2111
+    image: "https://picsum.photos/200",
+    link: "https://picsum.photos/200",
+    downloads: 2111,
+    rating: 5,
+    size: 1
   },
   {
-    id: 2,
+    id: 1,
     title: "Super Mario Bros",
+    details: "Super Mario is a platform game series created by Nintendo starring their mascot, Mario. Alternatively called the Super Mario Bros. series or simply the Mario series, it is the central series of the greater Mario franchise. At least one Super Mario game has been released for every major Nintendo video game console ",
     system: "NES",
-    image: "",
-    downloads: 2111
+    image: "https://picsum.photos/200",
+    link: "https://picsum.photos/200",
+    downloads: 2111,
+    rating: 5,
+    size: 1
   },
   {
-    id: 3,
+    id: 1,
     title: "Super Mario Bros",
+    details: "Super Mario is a platform game series created by Nintendo starring their mascot, Mario. Alternatively called the Super Mario Bros. series or simply the Mario series, it is the central series of the greater Mario franchise. At least one Super Mario game has been released for every major Nintendo video game console ",
     system: "NES",
-    image: "",
-    downloads: 2111
+    image: "https://picsum.photos/200",
+    link: "https://picsum.photos/200",
+    downloads: 2111,
+    rating: 5,
+    size: 1
   },
   {
-    id: 4,
+    id: 1,
     title: "Super Mario Bros",
+    details: "Super Mario is a platform game series created by Nintendo starring their mascot, Mario. Alternatively called the Super Mario Bros. series or simply the Mario series, it is the central series of the greater Mario franchise. At least one Super Mario game has been released for every major Nintendo video game console ",
     system: "NES",
-    image: "",
-    downloads: 2111
+    image: "https://picsum.photos/200",
+    link: "https://picsum.photos/200",
+    downloads: 2111,
+    rating: 5,
+    size: 1
   },
   {
-    id: 4,
+    id: 1,
     title: "Super Mario Bros",
+    details: "Super Mario is a platform game series created by Nintendo starring their mascot, Mario. Alternatively called the Super Mario Bros. series or simply the Mario series, it is the central series of the greater Mario franchise. At least one Super Mario game has been released for every major Nintendo video game console ",
     system: "NES",
-    image: "",
-    downloads: 2111
+    image: "https://picsum.photos/200",
+    link: "https://picsum.photos/200",
+    downloads: 2111,
+    rating: 5,
+    size: 1
   },
-  {
-    id: 4,
-    title: "Super Mario Bros",
-    system: "NES",
-    image: "",
-    downloads: 2111
-  },
+
 ]
 export const surveysData = [
   {

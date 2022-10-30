@@ -1,16 +1,19 @@
 import React from 'react';
 import { Card, Text } from '@ui-kitten/components';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { apple, smb3 } from '../Constants/images';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { useNavigation } from '@react-navigation/native'
 
 function GameItem({ data }) {
     const { id, title, image, downloads, system } = data;
+    const navigaion = useNavigation();
 
     return (
-        <View style={{ width: '100%' }}>
-            <Card>
+        <View style={{ width: '100%', }} >
+            <Card onPress={() => navigaion.navigate('GameDetails', { ...data })}>
+
                 <View style={{ alignItems: 'center', }}>
 
                     <Image source={smb3} resizeMode="cover" style={{ width: '100%', height: 64, borderRadius: 10 }} />

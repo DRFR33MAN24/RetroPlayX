@@ -10,7 +10,8 @@ import { NotificationScreen } from './NotificationScreen';
 import { HomeScreen, HomeScreenTopBar, homeIcon } from './HomeScreen';
 import { WalletScreen, walletIcon, WalletScreenTopBar } from './WalletScreen';
 import { ProfileScreen, profileIcon, ProfileScreenTopBar } from './ProfileScreen';
-import { SurveysScreen } from './SurveysScreen';
+import { GameDetails } from './GameDetails';
+import { GameView } from './GameView';
 import { WithdrawScreen } from './WithdrawScreen';
 import AuthScreen from './AuthScreen';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,8 +25,8 @@ const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
-    <BottomNavigationTab title="Home" icon={homeIcon} />
-    <BottomNavigationTab title="Wallet" icon={walletIcon} />
+    <BottomNavigationTab title="Store" icon={homeIcon} />
+    <BottomNavigationTab title="Play" icon={walletIcon} />
     <BottomNavigationTab title="Profile" icon={profileIcon} />
   </BottomNavigation>
 );
@@ -33,7 +34,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const StackNavigatorHome = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Dashboard"
+      name="Store"
       component={HomeScreen}
       options={{
         headerShown: false,
@@ -46,8 +47,13 @@ const StackNavigatorHome = () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Surveys"
-      component={SurveysScreen}
+      name="GameDetails"
+      component={GameDetails}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="GameView"
+      component={GameView}
       options={{ headerShown: false }}
     />
   </Stack.Navigator>
@@ -55,7 +61,7 @@ const StackNavigatorHome = () => (
 const StackNavigatorWallet = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Wallet"
+      name="Play"
       component={WalletScreen}
       options={{ headerShown: false }}
     />
@@ -70,14 +76,14 @@ const StackNavigatorWallet = () => (
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen
-      name="HomeTab"
+      name="StoreTab"
       component={StackNavigatorHome}
       options={{
         headerShown: false,
       }}
     />
     <Screen
-      name="WalletTab"
+      name="PlayTab"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={StackNavigatorWallet}
       options={{

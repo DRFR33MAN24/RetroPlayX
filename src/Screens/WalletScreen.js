@@ -7,7 +7,7 @@ import {
   useTheme,
   ButtonGroup,
 } from '@ui-kitten/components';
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,16 +16,17 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faCoins,
   faWallet,
   faCreditCard,
   faMoneyBillTransfer,
+  faGamepad
 } from '@fortawesome/free-solid-svg-icons';
 
-import {WalletTransaction} from '../Components/WalletTransaction';
+import { WalletTransaction } from '../Components/WalletTransaction';
 import {
   LineChart,
   BarChart,
@@ -34,12 +35,12 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from 'react-native-chart-kit';
-import {ThemeContext} from '../../theme-context';
+import { ThemeContext } from '../../theme-context';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchTransactions} from '../Reducers/walletSlice';
-export const walletIcon = ({style}) => (
-  <FontAwesomeIcon icon={faWallet} size={25} style={{color: style.tintColor}} />
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTransactions } from '../Reducers/walletSlice';
+export const walletIcon = ({ style }) => (
+  <FontAwesomeIcon icon={faGamepad} size={25} style={{ color: style.tintColor }} />
 );
 export const WalletScreenTopBar = () => {
   let navigation = useNavigation();
@@ -56,21 +57,21 @@ export const WalletScreenTopBar = () => {
         }}>
         {/* <Text style={styles.badge}> 2 </Text> */}
 
-        <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+        <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
         <Text> 100</Text>
       </View>
     </View>
   );
 };
 
-export const WalletScreen = ({navigation}) => {
+export const WalletScreen = ({ navigation }) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
   const uiTheme = useTheme();
   const theme = useContext(ThemeContext);
   const [chartParentWidth, setChartParentWidth] = useState(0);
-  const {transactions, offset} = useSelector(state => state.wallet);
+  const { transactions, offset } = useSelector(state => state.wallet);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,12 +80,12 @@ export const WalletScreen = ({navigation}) => {
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: uiTheme['background-basic-color-4']}}>
-      <TopNavigation title="Wallet" />
+      style={{ flex: 1, backgroundColor: uiTheme['background-basic-color-4'] }}>
+      <TopNavigation title="My Games" />
 
-      <ScrollView style={{flex: 1, marginHorizontal: 10}}>
+      <ScrollView style={{ flex: 1, marginHorizontal: 10 }}>
         <View>
-          <View style={{marginVertical: 20}}>
+          <View style={{ marginVertical: 20 }}>
             <Card>
               <View
                 style={{
@@ -93,7 +94,7 @@ export const WalletScreen = ({navigation}) => {
                   alignItems: 'center',
                   marginTop: 20,
                 }}>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                   <Text category="h6">Balance</Text>
                   <Text category="h1">$71.5</Text>
                 </View>
@@ -103,7 +104,7 @@ export const WalletScreen = ({navigation}) => {
                     height: '100%',
                     borderColor: uiTheme['text-basic-color'],
                   }}></View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                   <Text category="h6">Pending</Text>
                   <Text category="h1">$22.5</Text>
                 </View>
@@ -179,7 +180,7 @@ export const WalletScreen = ({navigation}) => {
           </View>
 
           <Card
-            onLayout={({nativeEvent}) => {
+            onLayout={({ nativeEvent }) => {
               setChartParentWidth(nativeEvent.layout.width);
             }}>
             <Text>Performance</Text>
@@ -189,7 +190,7 @@ export const WalletScreen = ({navigation}) => {
                 justifyContent: 'center',
                 marginVertical: 8,
               }}>
-              <ButtonGroup size="small" style={{borderRadius: 10}}>
+              <ButtonGroup size="small" style={{ borderRadius: 10 }}>
                 <Button style={styles.buttonGroup}>Hour</Button>
                 <Button style={styles.buttonGroup}>Day</Button>
                 <Button style={styles.buttonGroup}>Week</Button>
