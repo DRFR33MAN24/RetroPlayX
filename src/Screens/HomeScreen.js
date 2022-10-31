@@ -50,14 +50,13 @@ import {
   twitter,
   instagram,
 } from '../Constants/images';
-import {surveysData} from '../fakeJsonData';
-import {Survey, WideSurvey, WideSurvey2} from '../Components/Survey';
+
 import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchOffers} from '../Reducers/offersSlice';
+
 import {fetchStore} from '../Reducers/storeSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
 import {reloadUser} from '../Reducers/authSlice';
@@ -198,7 +197,7 @@ export const HomeScreen = ({navigation}) => {
   }, []);
 
   const getStore = offset => {
-    if (offset <= total_offers) {
+    if (offset <= total_games) {
       console.log(offset);
       dispatch(fetchStore(offset));
     }
@@ -299,34 +298,6 @@ export const HomeScreen = ({navigation}) => {
         </GestureHandlerRootView>
         <DailyGoals />
 
-        {/* <View style={{marginHorizontal: 10}}>
-          {surveys != null &&
-            surveys.map(survey => <WideSurvey data={survey} />)}
-        </View> */}
-        {/* <View>
-          <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
-            <Text>Refer friend and earn</Text>
-            <View style={{ marginVertical: 2 }}>
-              <Input
-                value={referral}
-                label="Friend Email"
-                placeholder="enter email here"
-                // caption={renderCaption}
-                //accessoryRight={renderEmailIcon}
-                // secureTextEntry={secureTextEntry}
-                onChangeText={nextValue => setReferral(nextValue)}
-              />
-            </View>
-            <View style={{ marginVertical: 2, paddingVertical: 10 }}>
-              <Button>Send Link</Button>
-            </View>
-            <TouchableOpacity>
-              <View style={{ marginVertical: 2, paddingVertical: 10 }}>
-                <Text>Active referrals: 15</Text>
-              </View>
-            </TouchableOpacity>
-          </Card>
-        </View> */}
         <TouchableOpacity>
           <View
             style={{
@@ -367,30 +338,6 @@ export const HomeScreen = ({navigation}) => {
         // onEndReached={() => getOffers(offset)}
         // onEndReachedThreshold={0.1}
       />
-
-      {/* <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            // flex: 1,
-            marginHorizontal: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}></View> */}
-
-      {/* <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            // flex: 1,
-            marginHorizontal: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          {offers != null &&
-            offers.map((offer, index) => <Survey data={offer} key={index} />)}
-
-        </View> */}
     </SafeAreaView>
   );
 };
