@@ -7445,10 +7445,9 @@
   dependencies:
     "prop-types" "^15.7.2"
 
-"react-native-background-downloader@^2.3.4":
-  "integrity" "sha512-SqAnsf3dJ/aoj2zq8zG/qVcQZxeK3Le0PsoNQ00G/q6oDho2kHNfIOxthD/00B0t384J3u2gWurwRW8idI79zg=="
-  "resolved" "https://registry.npmjs.org/react-native-background-downloader/-/react-native-background-downloader-2.3.4.tgz"
-  "version" "2.3.4"
+"react-native-background-downloader@github:kesha-antonov/react-native-background-downloader":
+  "resolved" "git+ssh://git@github.com/kesha-antonov/react-native-background-downloader.git#8f71d37809a88217f69ac70d7f06b54c93bbd677"
+  "version" "2.4.2"
 
 "react-native-chart-kit@^6.12.0":
   "integrity" "sha512-nZLGyCFzZ7zmX0KjYeeSV1HKuPhl1wOMlTAqa0JhlyW62qV/1ZPXHgT8o9s8mkFaGxdqbspOeuaa6I9jUQDgnA=="
