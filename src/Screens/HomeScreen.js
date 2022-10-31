@@ -58,6 +58,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchOffers} from '../Reducers/offersSlice';
+import {fetchStore} from '../Reducers/storeSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
 import {reloadUser} from '../Reducers/authSlice';
 import {games} from '../fakeJsonData';
@@ -185,26 +186,26 @@ export const HomeScreen = ({navigation}) => {
   // };
 
   const dispatch = useDispatch();
-  //const { offers, offset, total_offers } = useSelector(state => state.offers);
+  const {games, offset, total_games} = useSelector(state => state.store);
 
   const theme = useTheme();
   const [referral, setReferral] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
-    //setRefreshing(true);
-    // getOffers(0);
+    setRefreshing(true);
+    getStore(0);
   }, []);
 
-  const getOffers = offset => {
+  const getStore = offset => {
     if (offset <= total_offers) {
       console.log(offset);
-      dispatch(fetchOffers(offset));
+      dispatch(fetchStore(offset));
     }
   };
   useEffect(() => {
     // api call
-    // getOffers(0);
+    getStore(0);
   }, []);
 
   const HomeScreenHeaderComponent = () => {
