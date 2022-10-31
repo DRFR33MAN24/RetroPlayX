@@ -21,6 +21,7 @@ import {
   faFilter,
   faDesktop,
   faFighterJet,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
 import React, {useState, useContext, useEffect, useRef} from 'react';
@@ -53,7 +54,7 @@ import {
 
 import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler';
 
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -125,17 +126,34 @@ export const NotificationIcon = props => {
   );
 };
 
-export const HomeScreenContainer = props => (
-  <View
-    style={{
-      paddingHorizontal: 4,
-      flexDirection: 'row',
-      alignItems: 'center',
-    }}>
-    <NotificationIcon {...props} />
-    <CoinsComponent />
-  </View>
-);
+export const HomeScreenContainer = props => {
+  const [searchValue, setSearchValue] = useState('');
+  const renderSearchIcon = props => (
+    <FontAwesomeIcon
+      icon={faSearch}
+      size={15}
+      style={{color: props.style.tintColor}}
+    />
+  );
+  return (
+    <View
+      style={{
+        paddingHorizontal: 4,
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}>
+      <Input
+        style={{flex: 1}}
+        placeholder="Search..."
+        accessoryRight={renderSearchIcon}
+        value={searchValue}
+        onChangeText={nextValue => setSearchValue(nextValue)}
+      />
+      <NotificationIcon {...props} />
+      <CoinsComponent />
+    </View>
+  );
+};
 
 export const HomeScreenTopBar = () => {
   let navigation = useNavigation();
@@ -218,43 +236,43 @@ export const HomeScreen = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'space-evenly',
-            marginVertical: appStyles.s12,
+            marginVertical: appStyles.s6,
           }}>
           <TouchableOpacity
             style={{
-              width: appStyles.s30 * 3,
-              height: appStyles.s30 * 3,
+              width: appStyles.s24 * 2,
+              height: appStyles.s24 * 2,
               padding: appStyles.s12,
-              borderRadius: appStyles.s30 * 3,
+              borderRadius: appStyles.s24 * 2,
               backgroundColor: theme['color-primary-300'],
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faFilter} size={35} />
+            <FontAwesomeIcon icon={faFilter} size={25} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: appStyles.s30 * 3,
-              height: appStyles.s30 * 3,
+              width: appStyles.s24 * 2,
+              height: appStyles.s24 * 2,
               padding: appStyles.s12,
-              borderRadius: appStyles.s30 * 3,
+              borderRadius: appStyles.s24 * 2,
               backgroundColor: theme['color-primary-300'],
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faDesktop} size={35} />
+            <FontAwesomeIcon icon={faDesktop} size={25} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: appStyles.s30 * 3,
-              height: appStyles.s30 * 3,
+              width: appStyles.s24 * 2,
+              height: appStyles.s24 * 2,
               padding: appStyles.s12,
-              borderRadius: appStyles.s30 * 3,
+              borderRadius: appStyles.s24 * 2,
               backgroundColor: theme['color-primary-300'],
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FontAwesomeIcon icon={faFighterJet} size={35} />
+            <FontAwesomeIcon icon={faFighterJet} size={25} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity>
@@ -319,7 +337,6 @@ export const HomeScreen = ({navigation}) => {
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
-        title="Retro Play"
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
       />
       <Divider />

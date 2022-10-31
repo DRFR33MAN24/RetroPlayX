@@ -5,13 +5,12 @@ export const fetchStore = createAsyncThunk(
   'store/fetchStore',
   async (offset, {rejectWithValue}) => {
     try {
-      const user = await getUser();
+      // const user = await getUser();
 
       const response = await _getStoreGames({
-        offset: offset * 10,
-        token: user.token,
+        offset: '4',
+        //   token: user.token,
       });
-
       if (response.msg) {
         throw response;
       }
@@ -42,7 +41,9 @@ const storeSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchStore.fulfilled, (state, action) => {
-        state.offers = state.offers.concat(action.payload.rows);
+        // console.log('results', action.payload.results);
+        //state.games = state.games.concat(action.payload.results);
+        state.games = action.payload.results;
         state.total_games = action.payload.count;
         state.offset += 10;
       })

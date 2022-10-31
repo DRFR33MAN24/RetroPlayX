@@ -7,7 +7,7 @@ import {faDownload} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/native';
 
 function GameItem({data}) {
-  const {id, title, image, downloads, system} = data;
+  const {id, name, background_image} = data;
   const navigaion = useNavigation();
 
   return (
@@ -16,12 +16,12 @@ function GameItem({data}) {
       onPress={() => navigaion.navigate('GameDetails', {...data})}>
       <View style={{alignItems: 'center'}}>
         <Image
-          source={smb3}
+          source={{uri: background_image}}
           resizeMode="cover"
           style={{width: '100%', height: 64, borderRadius: 10}}
         />
       </View>
-      <Text category="s1">{title}</Text>
+      <Text category="s1">{name}</Text>
       <View
         style={{
           flexDirection: 'row',
@@ -34,9 +34,9 @@ function GameItem({data}) {
             size={15}
             style={{marginHorizontal: 5}}
           />
-          <Text category="label">{downloads}</Text>
+          <Text category="label">{''}</Text>
         </View>
-        <Text category="label">{system}</Text>
+        <Text category="label">{''}</Text>
       </View>
     </TouchableOpacity>
   );
