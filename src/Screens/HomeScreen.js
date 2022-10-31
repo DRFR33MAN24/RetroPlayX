@@ -61,7 +61,7 @@ import {fetchOffers} from '../Reducers/offersSlice';
 import {fetchStore} from '../Reducers/storeSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
 import {reloadUser} from '../Reducers/authSlice';
-import {games} from '../fakeJsonData';
+//import {games} from '../fakeJsonData';
 import GameItem from '../Components/GameItem';
 import {appStyles} from '../Constants/style';
 
