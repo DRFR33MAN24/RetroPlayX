@@ -42,7 +42,7 @@ export const _getStoreGames = async fetchData => {
 export const _getGameDetails = async fetchData => {
   try {
     const response = await fetch(
-      `${config.rawgServer}/games/${fetchData.id}?` +
+      `${config.rawgServer}/games/${fetchData.id.toString()}?` +
         new URLSearchParams({
           key: config.rawgKey,
         }),

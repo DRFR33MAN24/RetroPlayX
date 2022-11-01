@@ -42,7 +42,7 @@ export const GameDetails = ({navigation, route}) => {
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
-        title={name}
+        title={details.name}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
@@ -55,12 +55,12 @@ export const GameDetails = ({navigation, route}) => {
             marginVertical: appStyles.s12,
           }}>
           <Image
-            source={{uri: background_image}}
+            source={{uri: details.background_image}}
             resizeMode="stretch"
             style={{width: 64, height: 64, borderRadius: appStyles.s12}}
           />
           <View>
-            <Text category="h2">{name}</Text>
+            <Text category="h2">{details.name}</Text>
             <Text appearance="hint">{10}MB</Text>
           </View>
         </View>
@@ -111,7 +111,7 @@ export const GameDetails = ({navigation, route}) => {
           height={250}
           style={{marginVertical: appStyles.s12}}
           autoPlayInterval={3000}
-          data={[background_image]}
+          data={[details.background_image]}
           renderItem={({item, index}) => (
             <View
               style={{
