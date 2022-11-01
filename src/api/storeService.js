@@ -19,7 +19,7 @@ export const _getStoreGames = async fetchData => {
         new URLSearchParams({
           key: config.rawgKey,
           page_size: fetchData.offset,
-          platforms: '49,26',
+          platforms: '79,49,167,107,117,74,26,8,9,15,27,17,105,83,24,43,28,12',
         }),
       {
         method: 'GET',
