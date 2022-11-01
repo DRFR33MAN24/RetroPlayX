@@ -162,8 +162,8 @@ export const GameDetails = ({navigation, route}) => {
           />
         </GestureHandlerRootView>
         <Text>Game trailer</Text>
-        <View style={{width: '100%', height: 240}}>
-          {game_trailer.results ? (
+        {game_trailer.results ? (
+          <View style={{width: '100%', height: 240}}>
             <Video
               source={{uri: game_trailer.results[0].data[480]}} // Can be a URL or a local file.
               ref={ref => {
@@ -181,8 +181,8 @@ export const GameDetails = ({navigation, route}) => {
                 height: '100%',
               }}
             />
-          ) : null}
-        </View>
+          </View>
+        ) : null}
         <View style={{paddingHorizontal: 10}}>
           <Text>About Game</Text>
           <Text category="p1" appearance="hint">
