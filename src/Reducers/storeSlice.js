@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {
   _getGameDetails,
   _getGameScreenshots,
   _getGameTrailer,
   _getStoreGames,
 } from '../api/storeService';
-import { getUser } from './authSlice';
+import {getUser} from './authSlice';
 export const fetchStore = createAsyncThunk(
   'store/fetchStore',
-  async (offset, { rejectWithValue }) => {
+  async (offset, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
@@ -28,7 +28,7 @@ export const fetchStore = createAsyncThunk(
 
 export const getGameDetails = createAsyncThunk(
   'store/getGameDetails',
-  async (id, { rejectWithValue }) => {
+  async (id, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
@@ -45,7 +45,7 @@ export const getGameDetails = createAsyncThunk(
 
 export const getGameScreenshots = createAsyncThunk(
   'store/getGameScreenshots',
-  async (id, { rejectWithValue }) => {
+  async (id, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
@@ -61,7 +61,7 @@ export const getGameScreenshots = createAsyncThunk(
 );
 export const getGameTrailer = createAsyncThunk(
   'store/getGameTrailer',
-  async (id, { rejectWithValue }) => {
+  async (id, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
@@ -121,7 +121,7 @@ const storeSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getGameTrailer.fulfilled, (state, action) => {
-        state.game_trailer = action.payload.results;
+        state.game_trailer = action.payload.results[0];
       })
       .addCase(getGameTrailer.rejected, (state, action) => {
         state.errors = action.payload;

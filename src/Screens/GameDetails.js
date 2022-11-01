@@ -23,7 +23,9 @@ import Video from 'react-native-video';
 const regexForStripHTML = /<sup.*>.*?<\/sup>/gi;
 export const GameDetails = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const {game_detail, game_screen_shots} = useSelector(state => state.store);
+  const {game_detail, game_screen_shots, game_trailer} = useSelector(
+    state => state.store,
+  );
   const theme = useTheme();
   let player = useRef(null);
 
@@ -161,14 +163,14 @@ export const GameDetails = ({navigation, route}) => {
         <Text>Game trailer</Text>
         <View style={{width: '100%', height: 240}}>
           <Video
-            source={{uri: 'https://download.samplelib.com/mp4/sample-5s.mp4'}} // Can be a URL or a local file.
+            source={{uri: game_trailer.data[480]}} // Can be a URL or a local file.
             ref={ref => {
               player = ref;
             }}
             resizeMode="stretch"
             controls={true}
             useTextureView={false}
-            poster="https://baconmockup.com/300/200/"
+            poster={game_trailer.preview}
             //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
             //  onError={this.videoError}               // Callback when video cannot be loaded
             style={{
@@ -180,8 +182,9 @@ export const GameDetails = ({navigation, route}) => {
         <View style={{paddingHorizontal: 10}}>
           <Text>About Game</Text>
           <Text category="p1" appearance="hint">
-            {game_detail.description}
+            {game_detail.description_raw}
           </Text>
+          <Text>Geners</Text>
           {game_detail.genres?.map(obj => (
             <Text>{obj.name}</Text>
           ))}
