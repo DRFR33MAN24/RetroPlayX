@@ -102,17 +102,22 @@ export const GameDetails = ({navigation, route}) => {
         /> */}
         <GestureHandlerRootView>
           <Carousel
-            mode="horizontal-stack"
+            // mode="horizontal-stack"
+            // modeConfig={{
+            //   snapDirection: 'left',
+            //   stackInterval: 18,
+            // }}
+            mode="parallax"
             modeConfig={{
-              snapDirection: 'left',
-              stackInterval: 18,
+              parallaxScrollingScale: 0.9,
+              parallaxScrollingOffset: 50,
             }}
             autoPlay={true}
             width={Dimensions.get('screen').width}
             height={250}
             style={{marginVertical: appStyles.s12}}
             autoPlayInterval={3000}
-            data={game_screen_shots}
+            data={game_screen_shots.map(obj => obj.image)}
             renderItem={({item, index}) => (
               <View
                 style={{
