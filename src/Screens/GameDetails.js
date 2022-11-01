@@ -21,18 +21,7 @@ export const GameDetails = ({navigation, route}) => {
   // };
   const theme = useTheme();
 
-  const {
-    image,
-    details,
-    link,
-    downloads,
-    rating,
-    title,
-
-    category,
-    system,
-    size,
-  } = route.params;
+  const {id, name, background_image} = route.params;
 
   // useEffect(() => {
   //   // api call
@@ -52,7 +41,7 @@ export const GameDetails = ({navigation, route}) => {
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
-        title={title}
+        title={name}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
@@ -65,13 +54,13 @@ export const GameDetails = ({navigation, route}) => {
             marginVertical: appStyles.s12,
           }}>
           <Image
-            source={{uri: image}}
+            source={{uri: background_image}}
             resizeMode="stretch"
             style={{width: 64, height: 64, borderRadius: appStyles.s12}}
           />
           <View>
-            <Text category="h2">{title}</Text>
-            <Text appearance="hint">{size}MB</Text>
+            <Text category="h2">{name}</Text>
+            <Text appearance="hint">{10}MB</Text>
           </View>
         </View>
         <View
@@ -83,7 +72,7 @@ export const GameDetails = ({navigation, route}) => {
           <View>
             <Text appearance="hint">Rating</Text>
             <View style={{flexDirection: 'row'}}>
-              {[...Array(rating)].map((e, i) => (
+              {[...Array(5)].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
@@ -96,12 +85,12 @@ export const GameDetails = ({navigation, route}) => {
           <VerticalDivider />
           <View>
             <Text appearance="hint">Downloads</Text>
-            <Text appearance="hint">{downloads}</Text>
+            <Text appearance="hint">{1000}</Text>
           </View>
           <VerticalDivider />
           <View>
             <Text appearance="hint">System</Text>
-            <Text appearance="hint">{system}</Text>
+            <Text appearance="hint">{'NES'}</Text>
           </View>
         </View>
         <Button size="small">Install</Button>
@@ -121,7 +110,7 @@ export const GameDetails = ({navigation, route}) => {
           height={250}
           style={{marginVertical: appStyles.s12}}
           autoPlayInterval={3000}
-          data={[image]}
+          data={[background_image]}
           renderItem={({item, index}) => (
             <View
               style={{
@@ -150,9 +139,9 @@ export const GameDetails = ({navigation, route}) => {
         <View style={{paddingHorizontal: 10}}>
           <Text>About Game:</Text>
           <Text category="p1" appearance="hint">
-            {details}
+            {'dddd'}
           </Text>
-          <Text>{category}</Text>
+          <Text>{'dddd'}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

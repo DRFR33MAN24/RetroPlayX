@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import React, {useState, useEffect} from 'react';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 //import { StockScreen } from './StockScreen';
-import { StyleSheet } from 'react-native';
-import { NotificationScreen } from './NotificationScreen';
+import {StyleSheet} from 'react-native';
+import {NotificationScreen} from './NotificationScreen';
 
-import { HomeScreen, HomeScreenTopBar, homeIcon } from './HomeScreen';
-import { WalletScreen, walletIcon, WalletScreenTopBar } from './WalletScreen';
-import { ProfileScreen, profileIcon, ProfileScreenTopBar } from './ProfileScreen';
-import { GameDetails } from './GameDetails';
-import { GameView } from './GameView';
-import { WithdrawScreen } from './WithdrawScreen';
+import {HomeScreen, HomeScreenTopBar, homeIcon} from './HomeScreen';
+import {WalletScreen, walletIcon, WalletScreenTopBar} from './WalletScreen';
+import {ProfileScreen, profileIcon, ProfileScreenTopBar} from './ProfileScreen';
+import {GameDetails} from './GameDetails';
+import {GameView} from './GameView';
+import {WithdrawScreen} from './WithdrawScreen';
 import AuthScreen from './AuthScreen';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadUser, reloadUser, setDeviceToken } from '../Reducers/authSlice';
-import { Notifications } from 'react-native-notifications';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadUser, reloadUser, setDeviceToken} from '../Reducers/authSlice';
+import {Notifications} from 'react-native-notifications';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabBar = ({ navigation, state }) => (
+const BottomTabBar = ({navigation, state}) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
@@ -44,17 +44,17 @@ const StackNavigatorHome = () => (
     <Stack.Screen
       name="Notification"
       component={NotificationScreen}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
     <Stack.Screen
       name="GameDetails"
       component={GameDetails}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
     <Stack.Screen
       name="GameView"
       component={GameView}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
   </Stack.Navigator>
 );
@@ -63,13 +63,13 @@ const StackNavigatorWallet = () => (
     <Stack.Screen
       name="Play"
       component={WalletScreen}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
 
     <Stack.Screen
       name="Withdraw"
       component={WithdrawScreen}
-      options={{ headerShown: false }}
+      options={{headerShown: false}}
     />
   </Stack.Navigator>
 );
@@ -117,7 +117,6 @@ export const AppNavigator = () => {
       // TODO: Send the token to my server so it could send back push notifications...
       // sendTokenToServer(event.deviceToken);
       // console.log('Device Token Received', event.deviceToken);
-
       // dispatch(setDeviceToken(event.deviceToken));
       // dispatch(reloadUser(event.deviceToken));
     });
@@ -132,7 +131,7 @@ export const AppNavigator = () => {
         console.log(
           `Notification received in foreground: ${notification.title} : ${notification.body}`,
         );
-        completion({ alert: false, sound: false, badge: false });
+        completion({alert: false, sound: false, badge: false});
       },
     );
 

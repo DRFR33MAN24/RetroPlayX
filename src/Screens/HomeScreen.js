@@ -143,7 +143,7 @@ export const HomeScreenContainer = props => {
         alignItems: 'center',
       }}>
       <Input
-        style={{flex: 1}}
+        style={{flex: 1, borderRadius: appStyles.s12}}
         placeholder="Search..."
         accessoryRight={renderSearchIcon}
         value={searchValue}
@@ -232,63 +232,64 @@ export const HomeScreen = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginVertical: appStyles.s6,
-          }}>
-          <TouchableOpacity
-            style={{
-              width: appStyles.s24 * 2,
-              height: appStyles.s24 * 2,
-              padding: appStyles.s12,
-              borderRadius: appStyles.s24 * 2,
-              backgroundColor: theme['color-primary-300'],
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <FontAwesomeIcon icon={faFilter} size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: appStyles.s24 * 2,
-              height: appStyles.s24 * 2,
-              padding: appStyles.s12,
-              borderRadius: appStyles.s24 * 2,
-              backgroundColor: theme['color-primary-300'],
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <FontAwesomeIcon icon={faDesktop} size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: appStyles.s24 * 2,
-              height: appStyles.s24 * 2,
-              padding: appStyles.s12,
-              borderRadius: appStyles.s24 * 2,
-              backgroundColor: theme['color-primary-300'],
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <FontAwesomeIcon icon={faFighterJet} size={25} />
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity>
+        <GestureHandlerRootView>
           <View
             style={{
               flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-              marginVertical: 10,
+              justifyContent: 'space-evenly',
+              marginVertical: appStyles.s6,
             }}>
-            <Text category="h5">Featured Games</Text>
-            <FontAwesomeIcon icon={faChevronRight} size={20} />
+            <TouchableOpacity
+              style={{
+                width: appStyles.s24 * 2,
+                height: appStyles.s24 * 2,
+                padding: appStyles.s12,
+                borderRadius: appStyles.s24 * 2,
+                backgroundColor: theme['color-primary-300'],
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesomeIcon icon={faFilter} size={25} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                width: appStyles.s24 * 2,
+                height: appStyles.s24 * 2,
+                padding: appStyles.s12,
+                borderRadius: appStyles.s24 * 2,
+                backgroundColor: theme['color-primary-300'],
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesomeIcon icon={faDesktop} size={25} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                width: appStyles.s24 * 2,
+                height: appStyles.s24 * 2,
+                padding: appStyles.s12,
+                borderRadius: appStyles.s24 * 2,
+                backgroundColor: theme['color-primary-300'],
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesomeIcon icon={faFighterJet} size={25} />
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-        <GestureHandlerRootView>
+          <TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingHorizontal: 10,
+                marginVertical: 10,
+              }}>
+              <Text category="h5">Featured Games</Text>
+              <FontAwesomeIcon icon={faChevronRight} size={20} />
+            </View>
+          </TouchableOpacity>
+
           <Carousel
             // mode="horizontal-stack"
             // modeConfig={{
@@ -297,6 +298,7 @@ export const HomeScreen = ({navigation}) => {
             // }}
             autoPlay={true}
             width={Dimensions.get('screen').width}
+            height={200}
             autoPlayInterval={3000}
             data={games}
             renderItem={({item, index}) => (
@@ -308,27 +310,29 @@ export const HomeScreen = ({navigation}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   width: '100%',
+                  height: 200,
                 }}>
                 <GameItem key={index} data={item} />
               </View>
             )}
           />
-        </GestureHandlerRootView>
-        <DailyGoals />
 
-        <TouchableOpacity>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 10,
-              marginVertical: 10,
-            }}>
-            <Text category="h5">For You</Text>
-            <FontAwesomeIcon icon={faChevronRight} size={20} />
-          </View>
-        </TouchableOpacity>
+          <DailyGoals />
+
+          <TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingHorizontal: 10,
+                marginVertical: 10,
+              }}>
+              <Text category="h5">For You</Text>
+              <FontAwesomeIcon icon={faChevronRight} size={20} />
+            </View>
+          </TouchableOpacity>
+        </GestureHandlerRootView>
       </ScrollView>
     );
   };
@@ -344,7 +348,8 @@ export const HomeScreen = ({navigation}) => {
 
       <FlatList
         data={games}
-        keyExtractor={(item, index) => index}
+        initialNumToRender={4}
+        keyExtractor={(item, index) => item.id}
         renderItem={({item, index}) => (
           <View style={{flex: 1, alignItems: 'center', padding: 10}}>
             <GameItem data={item} key={index} />
