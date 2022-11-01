@@ -17,8 +17,8 @@ function GameItem({ data }) {
       <View style={{ alignItems: 'center' }}>
         <Image
           source={{ uri: background_image }}
-          resizeMode="cover"
-          style={{ width: '100%', height: 64, borderRadius: 10 }}
+          resizeMode="stretch"
+          style={{ width: '100%', height: 128, borderRadius: 10 }}
         />
       </View>
       <Text category="s1">{name}</Text>

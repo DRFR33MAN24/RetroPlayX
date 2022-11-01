@@ -64,6 +64,7 @@ import { reloadUser } from '../Reducers/authSlice';
 //import {games} from '../fakeJsonData';
 import GameItem from '../Components/GameItem';
 import { appStyles } from '../Constants/style';
+import GameItemWide from '../Components/GameItemWide';
 
 export const homeIcon = props => (
   <FontAwesomeIcon
@@ -239,42 +240,54 @@ export const HomeScreen = ({ navigation }) => {
               justifyContent: 'space-evenly',
               marginVertical: appStyles.s6,
             }}>
-            <TouchableOpacity
-              style={{
-                width: appStyles.s24 * 2,
-                height: appStyles.s24 * 2,
-                padding: appStyles.s12,
-                borderRadius: appStyles.s24 * 2,
-                backgroundColor: theme['color-primary-300'],
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesomeIcon icon={faFilter} size={25} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: appStyles.s24 * 2,
-                height: appStyles.s24 * 2,
-                padding: appStyles.s12,
-                borderRadius: appStyles.s24 * 2,
-                backgroundColor: theme['color-primary-300'],
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesomeIcon icon={faDesktop} size={25} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: appStyles.s24 * 2,
-                height: appStyles.s24 * 2,
-                padding: appStyles.s12,
-                borderRadius: appStyles.s24 * 2,
-                backgroundColor: theme['color-primary-300'],
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesomeIcon icon={faFighterJet} size={25} />
-            </TouchableOpacity>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+              <TouchableOpacity
+                style={{
+                  width: appStyles.s18 * 2,
+                  height: appStyles.s18 * 2,
+                  padding: appStyles.s12,
+                  borderRadius: appStyles.s18 * 2,
+                  backgroundColor: theme['color-primary-300'],
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesomeIcon icon={faFilter} size={25} />
+              </TouchableOpacity>
+              <Text appearance="hint">Category</Text>
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+              <TouchableOpacity
+                style={{
+                  width: appStyles.s18 * 2,
+                  height: appStyles.s18 * 2,
+                  padding: appStyles.s12,
+                  borderRadius: appStyles.s18 * 2,
+                  backgroundColor: theme['color-primary-300'],
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesomeIcon icon={faDesktop} size={25} />
+              </TouchableOpacity>
+              <Text appearance="hint">Platform</Text>
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+              <TouchableOpacity
+                style={{
+                  width: appStyles.s18 * 2,
+                  height: appStyles.s18 * 2,
+                  padding: appStyles.s12,
+                  borderRadius: appStyles.s18 * 2,
+                  backgroundColor: theme['color-primary-300'],
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesomeIcon icon={faFighterJet} size={25} />
+              </TouchableOpacity>
+              <Text appearance='hint'>Trending</Text>
+            </View>
           </View>
           <TouchableOpacity>
             <View
@@ -283,7 +296,7 @@ export const HomeScreen = ({ navigation }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingHorizontal: 10,
-                marginVertical: 10,
+                marginVertical: appStyles.s6,
               }}>
               <Text category="h5">Featured Games</Text>
               <FontAwesomeIcon icon={faChevronRight} size={20} />
@@ -312,7 +325,7 @@ export const HomeScreen = ({ navigation }) => {
                   width: '100%',
                   height: 200,
                 }}>
-                <GameItem key={index} data={item} />
+                <GameItemWide key={index} data={item} />
               </View>
             )}
           />
@@ -326,7 +339,7 @@ export const HomeScreen = ({ navigation }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingHorizontal: 10,
-                marginVertical: 10,
+                marginVertical: appStyles.s6,
               }}>
               <Text category="h5">For You</Text>
               <FontAwesomeIcon icon={faChevronRight} size={20} />
