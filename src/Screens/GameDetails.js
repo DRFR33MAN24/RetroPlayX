@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView, ScrollView, View, Image, Dimensions } from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {SafeAreaView, ScrollView, View, Image, Dimensions} from 'react-native';
 import {
   Divider,
   Card,
@@ -8,26 +8,26 @@ import {
   useTheme,
   Button,
 } from '@ui-kitten/components';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faStar} from '@fortawesome/free-solid-svg-icons';
 
-import { BackIcon } from '../Components/NavigationComponents';
+import {BackIcon} from '../Components/NavigationComponents';
 import Carousel from 'react-native-reanimated-carousel';
-import { appStyles } from '../Constants/style';
+import {appStyles} from '../Constants/style';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getGameDetails, getGameScreenshots } from '../Reducers/storeSlice';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+import {getGameDetails, getGameScreenshots} from '../Reducers/storeSlice';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 
-const regexForStripHTML = /<sup.*>.*?<\/sup>/ig;
-export const GameDetails = ({ navigation, route }) => {
+const regexForStripHTML = /<sup.*>.*?<\/sup>/gi;
+export const GameDetails = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const { game_detail, game_screen_shots } = useSelector(state => state.store);
+  const {game_detail, game_screen_shots} = useSelector(state => state.store);
   const theme = useTheme();
   let player = useRef(null);
 
-  const { id } = route.params;
+  const {id} = route.params;
 
   useEffect(() => {
     dispatch(getGameDetails(id));
@@ -44,14 +44,14 @@ export const GameDetails = ({ navigation, route }) => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
         title={game_detail.name}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
 
-      <ScrollView style={{ flex: 1, padding: appStyles.p10 }}>
+      <ScrollView style={{flex: 1, padding: appStyles.p10}}>
         <View
           style={{
             flexDirection: 'row',
@@ -59,13 +59,22 @@ export const GameDetails = ({ navigation, route }) => {
             marginVertical: appStyles.s12,
           }}>
           <Image
-            source={{ uri: game_detail.background_image }}
+            source={{uri: game_detail.background_image}}
             resizeMode="stretch"
-            style={{ width: 64, height: 64, borderRadius: appStyles.s12, marginHorizontal: appStyles.s6 }}
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: appStyles.s12,
+              marginHorizontal: appStyles.s6,
+            }}
           />
           <View>
-            <Text category="h5" numberOfLines={3}>{game_detail.name}</Text>
-            <Text appearance="hint" category="label">{10} MB</Text>
+            <Text category="h5" numberOfLines={3}>
+              {game_detail.name}
+            </Text>
+            <Text appearance="hint" category="label">
+              {10} MB
+            </Text>
           </View>
         </View>
         <View
@@ -76,13 +85,13 @@ export const GameDetails = ({ navigation, route }) => {
           }}>
           <View>
             <Text appearance="hint">Rating</Text>
-            <View style={{ flexDirection: 'row' }}>
-              {[...Array(5)].map((e, i) => (
+            <View style={{flexDirection: 'row'}}>
+              {[...Array(Math.ceil(game_detail.rating))].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
                   size={15}
-                  style={{ color: theme['color-primary-300'] }}
+                  style={{color: theme['color-primary-300']}}
                 />
               ))}
             </View>
@@ -90,11 +99,11 @@ export const GameDetails = ({ navigation, route }) => {
           <VerticalDivider />
           <View>
             <Text appearance="hint">Downloads</Text>
-            <Text appearance="hint">{1000}</Text>
+            <Text appearance="hint">{game_detail.added}</Text>
           </View>
           <VerticalDivider />
           <View>
-            <Text appearance="hint">System</Text>
+            <Text appearance="hint">Platform</Text>
             <Text appearance="hint">{'NES'}</Text>
           </View>
         </View>
@@ -116,16 +125,14 @@ export const GameDetails = ({ navigation, route }) => {
               parallaxScrollingScale: 1,
               parallaxScrollingOffset: 120,
               parallaxAdjacentItemScale: 0.6,
-
             }}
-
             autoPlay={true}
             width={Dimensions.get('screen').width}
             height={250}
-            style={{ marginVertical: appStyles.s12 }}
+            style={{marginVertical: appStyles.s12}}
             autoPlayInterval={3000}
             data={game_screen_shots.map(obj => obj.image)}
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <View
                 style={{
                   padding: 0,
@@ -138,7 +145,7 @@ export const GameDetails = ({ navigation, route }) => {
                 }}>
                 <Image
                   key={index}
-                  source={{ uri: item }}
+                  source={{uri: item}}
                   resizeMode="cover"
                   style={{
                     width: '80%',
@@ -152,11 +159,11 @@ export const GameDetails = ({ navigation, route }) => {
           />
         </GestureHandlerRootView>
         <Text>Game trailer</Text>
-        <View style={{ width: '100%', height: 240 }}>
-
-          <Video source={{ uri: "https://download.samplelib.com/mp4/sample-5s.mp4" }}   // Can be a URL or a local file.
-            ref={(ref) => {
-              player = ref
+        <View style={{width: '100%', height: 240}}>
+          <Video
+            source={{uri: 'https://download.samplelib.com/mp4/sample-5s.mp4'}} // Can be a URL or a local file.
+            ref={ref => {
+              player = ref;
             }}
             resizeMode="stretch"
             controls={true}
@@ -165,18 +172,19 @@ export const GameDetails = ({ navigation, route }) => {
             //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
             //  onError={this.videoError}               // Callback when video cannot be loaded
             style={{
-
               width: '100%',
-              height: '100%'
+              height: '100%',
             }}
           />
         </View>
-        <View style={{ paddingHorizontal: 10 }}>
-          <Text>About Game:</Text>
+        <View style={{paddingHorizontal: 10}}>
+          <Text>About Game</Text>
           <Text category="p1" appearance="hint">
             {game_detail.description}
           </Text>
-          <Text>{''}</Text>
+          {game_detail.genres?.map(obj => (
+            <Text>{obj.name}</Text>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
