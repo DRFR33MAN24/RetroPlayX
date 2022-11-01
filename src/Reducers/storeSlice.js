@@ -83,7 +83,7 @@ const storeSlice = createSlice({
     total_games: 0,
     game_detail: {},
     game_screen_shots: [],
-    game_trailer: [],
+    game_trailer: {},
     offset: 0,
     status: 'idle',
     errors: {},
@@ -121,7 +121,7 @@ const storeSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getGameTrailer.fulfilled, (state, action) => {
-        state.game_trailer = action.payload.results[0];
+        state.game_trailer = action.payload;
       })
       .addCase(getGameTrailer.rejected, (state, action) => {
         state.errors = action.payload;

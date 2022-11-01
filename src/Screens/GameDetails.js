@@ -32,8 +32,8 @@ export const GameDetails = ({navigation, route}) => {
   const {id} = route.params;
 
   useEffect(() => {
-    dispatch(getGameDetails(id));
-    dispatch(getGameScreenshots(id));
+    dispatch(getGameDetails(3498));
+    dispatch(getGameScreenshots(3498));
   }, []);
   const VerticalDivider = () => (
     <View
@@ -43,7 +43,8 @@ export const GameDetails = ({navigation, route}) => {
         borderColor: theme['text-hint-color'],
       }}></View>
   );
-
+  console.log(game_detail.rating);
+  //console.log(game_trailer.data[480]);
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
@@ -88,7 +89,7 @@ export const GameDetails = ({navigation, route}) => {
           <View>
             <Text appearance="hint">Rating</Text>
             <View style={{flexDirection: 'row'}}>
-              {[...Array(Math.ceil(game_detail.rating))].map((e, i) => (
+              {[...Array(Math.ceil(parseFloat(5)))].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
@@ -162,22 +163,25 @@ export const GameDetails = ({navigation, route}) => {
         </GestureHandlerRootView>
         <Text>Game trailer</Text>
         <View style={{width: '100%', height: 240}}>
-          <Video
-            source={{uri: game_trailer.data[480]}} // Can be a URL or a local file.
-            ref={ref => {
-              player = ref;
-            }}
-            resizeMode="stretch"
-            controls={true}
-            useTextureView={false}
-            poster={game_trailer.preview}
-            //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
-            //  onError={this.videoError}               // Callback when video cannot be loaded
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-          />
+          {game_trailer.results ? (
+            <Video
+              source={{uri: game_trailer.results[0].data[480]}} // Can be a URL or a local file.
+              ref={ref => {
+                player = ref;
+              }}
+              resizeMode="stretch"
+              paused={true}
+              controls={true}
+              useTextureView={false}
+              poster={game_trailer.results[0].preview}
+              //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
+              //  onError={this.videoError}               // Callback when video cannot be loaded
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          ) : null}
         </View>
         <View style={{paddingHorizontal: 10}}>
           <Text>About Game</Text>
