@@ -39,3 +39,29 @@ export const _getStoreGames = async fetchData => {
     }
   }
 };
+export const _getGameDetails = async fetchData => {
+  try {
+    const response = await fetch(
+      `${config.rawgServer}/games/${fetchData.id}?` +
+        new URLSearchParams({
+          key: config.rawgKey,
+        }),
+      {
+        method: 'GET',
+
+        headers: {
+          Accept: 'application/json',
+        },
+      },
+    );
+    const json = await response.json();
+
+    return json;
+  } catch (error) {
+    if (!error.msg) {
+      throw {msg: 'connection error'};
+    } else {
+      throw error;
+    }
+  }
+};

@@ -13,7 +13,7 @@ function GameItem({data}) {
   return (
     <TouchableOpacity
       style={{width: '100%'}}
-      onPress={() => navigaion.navigate('GameDetails', {...data})}>
+      onPress={() => navigaion.navigate('GameDetails', id)}>
       <View style={{alignItems: 'center'}}>
         <Image
           source={{uri: background_image}}

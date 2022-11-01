@@ -14,6 +14,7 @@ import {faStar} from '@fortawesome/free-solid-svg-icons';
 import {BackIcon} from '../Components/NavigationComponents';
 import Carousel from 'react-native-reanimated-carousel';
 import {appStyles} from '../Constants/style';
+import {_getGameDetails} from '../api/storeService';
 
 export const GameDetails = ({navigation, route}) => {
   // const navigateDetails = () => {
@@ -21,13 +22,13 @@ export const GameDetails = ({navigation, route}) => {
   // };
   const theme = useTheme();
 
-  const {id, name, background_image} = route.params;
-
-  // useEffect(() => {
-  //   // api call
-  //   setSurveys(surveysData);
-  //   //console.log(surveyData);
-  // }, []);
+  const {id} = route.params;
+  const [details, setDetails] = useState({});
+  useEffect(() => {
+    // api call
+    const details = _getGameDetails(id);
+    setDetails(details);
+  }, []);
   const VerticalDivider = () => (
     <View
       style={{
