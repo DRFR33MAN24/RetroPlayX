@@ -1,9 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { _getGameDetails, _getStoreGames } from '../api/storeService';
-import { getUser } from './authSlice';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {
+  _getGameDetails,
+  _getGameScreenshots,
+  _getGameTrailer,
+  _getStoreGames,
+} from '../api/storeService';
+import {getUser} from './authSlice';
 export const fetchStore = createAsyncThunk(
   'store/fetchStore',
-  async (offset, { rejectWithValue }) => {
+  async (offset, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
@@ -23,11 +28,44 @@ export const fetchStore = createAsyncThunk(
 
 export const getGameDetails = createAsyncThunk(
   'store/getGameDetails',
-  async (id, { rejectWithValue }) => {
+  async (id, {rejectWithValue}) => {
     try {
       // const user = await getUser();
 
       const response = await _getGameDetails(id);
+      if (response.msg) {
+        throw response;
+      }
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const getGameScreenshots = createAsyncThunk(
+  'store/getGameScreenshots',
+  async (id, {rejectWithValue}) => {
+    try {
+      // const user = await getUser();
+
+      const response = await _getGameScreenshots(id);
+      if (response.msg) {
+        throw response;
+      }
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+export const getGameTrailer = createAsyncThunk(
+  'store/getGameScreenshots',
+  async (id, {rejectWithValue}) => {
+    try {
+      // const user = await getUser();
+
+      const response = await _getGameTrailer(id);
       if (response.msg) {
         throw response;
       }
@@ -44,6 +82,8 @@ const storeSlice = createSlice({
     games: [],
     total_games: 0,
     game_detail: {},
+    game_screen_shots: [],
+    game_trailer: [],
     offset: 0,
     status: 'idle',
     errors: {},
@@ -72,13 +112,29 @@ const storeSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getGameDetails.fulfilled, (state, action) => {
-
         state.game_detail = action.payload;
-
       })
       .addCase(getGameDetails.rejected, (state, action) => {
         state.errors = action.payload;
       })
+      .addCase(getGameTrailer.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getGameTrailer.fulfilled, (state, action) => {
+        state.game_trailer = action.payload.results;
+      })
+      .addCase(getGameTrailer.rejected, (state, action) => {
+        state.errors = action.payload;
+      })
+      .addCase(getGameScreenshots.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getGameScreenshots.fulfilled, (state, action) => {
+        state.game_screen_shots = action.payload.results;
+      })
+      .addCase(getGameScreenshots.rejected, (state, action) => {
+        state.errors = action.payload;
+      });
   },
 });
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, View, Image, Dimensions } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, ScrollView, View, Image, Dimensions} from 'react-native';
 import {
   Divider,
   Card,
@@ -8,28 +8,27 @@ import {
   useTheme,
   Button,
 } from '@ui-kitten/components';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faStar} from '@fortawesome/free-solid-svg-icons';
 
-import { BackIcon } from '../Components/NavigationComponents';
+import {BackIcon} from '../Components/NavigationComponents';
 import Carousel from 'react-native-reanimated-carousel';
-import { appStyles } from '../Constants/style';
+import {appStyles} from '../Constants/style';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getGameDetails } from '../Reducers/storeSlice';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-export const GameDetails = ({ navigation, route }) => {
-
+import {useDispatch, useSelector} from 'react-redux';
+import {getGameDetails, getGameScreenshots} from '../Reducers/storeSlice';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+export const GameDetails = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const { game_detail } = useSelector(state => state.store);
+  const {game_detail, game_screen_shots} = useSelector(state => state.store);
   const theme = useTheme();
 
-  const { id } = route.params;
-
+  const {id} = route.params;
 
   useEffect(() => {
     dispatch(getGameDetails(id));
-  }, [])
+    dispatch(getGameScreenshots(id));
+  }, []);
   const VerticalDivider = () => (
     <View
       style={{
@@ -41,14 +40,14 @@ export const GameDetails = ({ navigation, route }) => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
+      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
       <TopNavigation
         title={game_detail.name}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
 
-      <ScrollView style={{ flex: 1, padding: appStyles.p10 }}>
+      <ScrollView style={{flex: 1, padding: appStyles.p10}}>
         <View
           style={{
             flexDirection: 'row',
@@ -56,9 +55,9 @@ export const GameDetails = ({ navigation, route }) => {
             marginVertical: appStyles.s12,
           }}>
           <Image
-            source={{ uri: game_detail.background_image }}
+            source={{uri: game_detail.background_image}}
             resizeMode="stretch"
-            style={{ width: 64, height: 64, borderRadius: appStyles.s12 }}
+            style={{width: 64, height: 64, borderRadius: appStyles.s12}}
           />
           <View>
             <Text category="h3">{game_detail.name}</Text>
@@ -73,13 +72,13 @@ export const GameDetails = ({ navigation, route }) => {
           }}>
           <View>
             <Text appearance="hint">Rating</Text>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               {[...Array(5)].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
                   size={15}
-                  style={{ color: theme['color-primary-300'] }}
+                  style={{color: theme['color-primary-300']}}
                 />
               ))}
             </View>
@@ -102,8 +101,6 @@ export const GameDetails = ({ navigation, route }) => {
           style={{width: '100%', height: 200, marginVertical: appStyles.s12}}
         /> */}
         <GestureHandlerRootView>
-
-
           <Carousel
             mode="horizontal-stack"
             modeConfig={{
@@ -113,10 +110,10 @@ export const GameDetails = ({ navigation, route }) => {
             autoPlay={true}
             width={Dimensions.get('screen').width}
             height={250}
-            style={{ marginVertical: appStyles.s12 }}
+            style={{marginVertical: appStyles.s12}}
             autoPlayInterval={3000}
-            data={[game_detail.background_image, game_detail.background_image_additional, game_detail.background_image_additional]}
-            renderItem={({ item, index }) => (
+            data={game_screen_shots}
+            renderItem={({item, index}) => (
               <View
                 style={{
                   padding: 0,
@@ -129,7 +126,7 @@ export const GameDetails = ({ navigation, route }) => {
                 }}>
                 <Image
                   key={index}
-                  source={{ uri: item }}
+                  source={{uri: item}}
                   resizeMode="cover"
                   style={{
                     width: '80%',
@@ -142,7 +139,7 @@ export const GameDetails = ({ navigation, route }) => {
             )}
           />
         </GestureHandlerRootView>
-        <View style={{ paddingHorizontal: 10 }}>
+        <View style={{paddingHorizontal: 10}}>
           <Text>About Game:</Text>
           <Text category="p1" appearance="hint">
             {game_detail.description}
