@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, View, Image, Dimensions} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, View, Image, Dimensions } from 'react-native';
 import {
   Divider,
   Card,
@@ -8,27 +8,28 @@ import {
   useTheme,
   Button,
 } from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faStar} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import {BackIcon} from '../Components/NavigationComponents';
+import { BackIcon } from '../Components/NavigationComponents';
 import Carousel from 'react-native-reanimated-carousel';
-import {appStyles} from '../Constants/style';
-import {_getGameDetails} from '../api/storeService';
+import { appStyles } from '../Constants/style';
 
-export const GameDetails = ({navigation, route}) => {
-  // const navigateDetails = () => {
-  //   navigation.navigate('Details');
-  // };
+import { useDispatch, useSelector } from 'react-redux';
+import { getGameDetails } from '../Reducers/storeSlice';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+export const GameDetails = ({ navigation, route }) => {
+
+  const dispatch = useDispatch();
+  const { game_detail } = useSelector(state => state.store);
   const theme = useTheme();
 
-  const {id} = route.params;
-  const [details, setDetails] = useState({});
+  const { id } = route.params;
+
+
   useEffect(() => {
-    // api call
-    const details = _getGameDetails(id);
-    setDetails(details);
-  }, []);
+    dispatch(getGameDetails(id));
+  }, [])
   const VerticalDivider = () => (
     <View
       style={{
@@ -40,14 +41,14 @@ export const GameDetails = ({navigation, route}) => {
 
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
+      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
       <TopNavigation
-        title={details.name}
+        title={game_detail.name}
         accessoryLeft={<BackIcon navigation={navigation} />}
       />
       <Divider />
 
-      <ScrollView style={{flex: 1, padding: appStyles.p10}}>
+      <ScrollView style={{ flex: 1, padding: appStyles.p10 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -55,12 +56,12 @@ export const GameDetails = ({navigation, route}) => {
             marginVertical: appStyles.s12,
           }}>
           <Image
-            source={{uri: details.background_image}}
+            source={{ uri: game_detail.background_image }}
             resizeMode="stretch"
-            style={{width: 64, height: 64, borderRadius: appStyles.s12}}
+            style={{ width: 64, height: 64, borderRadius: appStyles.s12 }}
           />
           <View>
-            <Text category="h2">{details.name}</Text>
+            <Text category="h3">{game_detail.name}</Text>
             <Text appearance="hint">{10}MB</Text>
           </View>
         </View>
@@ -72,13 +73,13 @@ export const GameDetails = ({navigation, route}) => {
           }}>
           <View>
             <Text appearance="hint">Rating</Text>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               {[...Array(5)].map((e, i) => (
                 <FontAwesomeIcon
                   key={i}
                   icon={faStar}
                   size={15}
-                  style={{color: theme['color-primary-300']}}
+                  style={{ color: theme['color-primary-300'] }}
                 />
               ))}
             </View>
@@ -100,49 +101,53 @@ export const GameDetails = ({navigation, route}) => {
           resizeMode="stretch"
           style={{width: '100%', height: 200, marginVertical: appStyles.s12}}
         /> */}
-        <Carousel
-          // mode="horizontal-stack"
-          // modeConfig={{
-          //   snapDirection: 'left',
-          //   stackInterval: 18,
-          // }}
-          autoPlay={false}
-          width={Dimensions.get('screen').width}
-          height={250}
-          style={{marginVertical: appStyles.s12}}
-          autoPlayInterval={3000}
-          data={[details.background_image]}
-          renderItem={({item, index}) => (
-            <View
-              style={{
-                padding: 0,
-                margin: 0,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '30%',
-                height: 200,
-              }}>
-              <Image
-                key={index}
-                source={{uri: item}}
-                resizeMode="cover"
+        <GestureHandlerRootView>
+
+
+          <Carousel
+            mode="horizontal-stack"
+            modeConfig={{
+              snapDirection: 'left',
+              stackInterval: 18,
+            }}
+            autoPlay={true}
+            width={Dimensions.get('screen').width}
+            height={250}
+            style={{ marginVertical: appStyles.s12 }}
+            autoPlayInterval={3000}
+            data={[game_detail.background_image, game_detail.background_image_additional, game_detail.background_image_additional]}
+            renderItem={({ item, index }) => (
+              <View
                 style={{
+                  padding: 0,
+                  margin: 0,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   width: '100%',
                   height: 200,
-                  marginVertical: appStyles.s12,
-                  borderRadius: appStyles.s6,
-                }}
-              />
-            </View>
-          )}
-        />
-        <View style={{paddingHorizontal: 10}}>
+                }}>
+                <Image
+                  key={index}
+                  source={{ uri: item }}
+                  resizeMode="cover"
+                  style={{
+                    width: '80%',
+                    height: 200,
+                    marginVertical: appStyles.s12,
+                    borderRadius: appStyles.s6,
+                  }}
+                />
+              </View>
+            )}
+          />
+        </GestureHandlerRootView>
+        <View style={{ paddingHorizontal: 10 }}>
           <Text>About Game:</Text>
           <Text category="p1" appearance="hint">
-            {'dddd'}
+            {game_detail.description}
           </Text>
-          <Text>{'dddd'}</Text>
+          <Text>{''}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -16,10 +16,11 @@ export const _getStoreGames = async fetchData => {
   try {
     const response = await fetch(
       `${config.rawgServer}/games?` +
-        new URLSearchParams({
-          key: config.rawgKey,
-          page_size: fetchData.offset,
-        }),
+      new URLSearchParams({
+        key: config.rawgKey,
+        page_size: fetchData.offset,
+        platforms: "49,26"
+      }),
       {
         method: 'GET',
 
@@ -33,19 +34,20 @@ export const _getStoreGames = async fetchData => {
     return json;
   } catch (error) {
     if (!error.msg) {
-      throw {msg: 'connection error'};
+      throw { msg: 'connection error' };
     } else {
       throw error;
     }
   }
 };
-export const _getGameDetails = async fetchData => {
+export const _getGameDetails = async id => {
+
   try {
     const response = await fetch(
-      `${config.rawgServer}/games/${fetchData.id.toString()}?` +
-        new URLSearchParams({
-          key: config.rawgKey,
-        }),
+      `${config.rawgServer}/games/${id}?` +
+      new URLSearchParams({
+        key: config.rawgKey,
+      }),
       {
         method: 'GET',
 
@@ -56,10 +58,11 @@ export const _getGameDetails = async fetchData => {
     );
     const json = await response.json();
 
+
     return json;
   } catch (error) {
     if (!error.msg) {
-      throw {msg: 'connection error'};
+      throw { msg: 'connection error' };
     } else {
       throw error;
     }

@@ -9,7 +9,7 @@ import {
   useTheme,
   Input,
 } from '@ui-kitten/components';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faBell,
   faCoins,
@@ -24,7 +24,7 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
-import React, {useState, useContext, useEffect, useRef} from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -37,10 +37,10 @@ import {
   FlatList,
 } from 'react-native';
 import * as Progress from 'react-native-progress';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import {BackIcon} from '../Components/NavigationComponents';
-import {DailyGoals} from '../Components/DailyGoals';
+import { BackIcon } from '../Components/NavigationComponents';
+import { DailyGoals } from '../Components/DailyGoals';
 import {
   gambler,
   checklist,
@@ -52,25 +52,25 @@ import {
   instagram,
 } from '../Constants/images';
 
-import {Congratulation} from '../Components/Congratulation';
+import { Congratulation } from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
-import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler';
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {fetchStore} from '../Reducers/storeSlice';
-import {fetchNotifications} from '../Reducers/notificationSlice';
-import {reloadUser} from '../Reducers/authSlice';
+import { fetchStore } from '../Reducers/storeSlice';
+import { fetchNotifications } from '../Reducers/notificationSlice';
+import { reloadUser } from '../Reducers/authSlice';
 //import {games} from '../fakeJsonData';
 import GameItem from '../Components/GameItem';
-import {appStyles} from '../Constants/style';
+import { appStyles } from '../Constants/style';
 
 export const homeIcon = props => (
   <FontAwesomeIcon
     {...props}
     icon={faStore}
     size={25}
-    style={{color: props.style.tintColor}}
+    style={{ color: props.style.tintColor }}
   />
 );
 
@@ -92,10 +92,10 @@ export const CoinsComponent = props => {
 
         <Image
           source={dollar}
-          style={{width: 16, height: 16, opacity: 1, resizeMode: 'stretch'}}
+          style={{ width: 16, height: 16, opacity: 1, resizeMode: 'stretch' }}
         />
         {/* <FontAwesomeIcon icon={faCoins} size={18} style={{color: 'gold'}} /> */}
-        <Text style={{fontSize: 12}}> {balance}</Text>
+        <Text style={{ fontSize: 12 }}> {balance}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -115,11 +115,11 @@ export const NotificationIcon = props => {
       <Button
         appearance="ghost"
         onPress={() => props.navigation.navigate('Notification')}
-        style={{padding: 0}}>
+        style={{ padding: 0 }}>
         <View style={styles.badgeIconView}>
           <Text style={styles.badge}> {notificationsCount} </Text>
 
-          <FontAwesomeIcon icon={faBell} size={20} style={{color: 'gold'}} />
+          <FontAwesomeIcon icon={faBell} size={20} style={{ color: 'gold' }} />
         </View>
       </Button>
     </Animatable.View>
@@ -132,7 +132,7 @@ export const HomeScreenContainer = props => {
     <FontAwesomeIcon
       icon={faSearch}
       size={15}
-      style={{color: props.style.tintColor}}
+      style={{ color: props.style.tintColor }}
     />
   );
   return (
@@ -143,7 +143,7 @@ export const HomeScreenContainer = props => {
         alignItems: 'center',
       }}>
       <Input
-        style={{flex: 1, borderRadius: appStyles.s12}}
+        style={{ flex: 1, borderRadius: appStyles.s12 }}
         placeholder="Search..."
         accessoryRight={renderSearchIcon}
         value={searchValue}
@@ -170,11 +170,11 @@ export const HomeScreenTopBar = () => {
         <Button
           appearance="ghost"
           onPress={() => navigation.navigate('Notification')}
-          style={{padding: 0}}>
+          style={{ padding: 0 }}>
           <View style={styles.badgeIconView}>
             <Text style={styles.badge}> 2 </Text>
 
-            <FontAwesomeIcon icon={faBell} size={25} style={{color: 'gold'}} />
+            <FontAwesomeIcon icon={faBell} size={25} style={{ color: 'gold' }} />
           </View>
         </Button>
       </View>
@@ -189,7 +189,7 @@ export const HomeScreenTopBar = () => {
           }}>
           {/* <Text style={styles.badge}> 2 </Text> */}
 
-          <FontAwesomeIcon icon={faCoins} size={25} style={{color: 'gold'}} />
+          <FontAwesomeIcon icon={faCoins} size={25} style={{ color: 'gold' }} />
           <Text> 100</Text>
         </View>
       </View>
@@ -197,13 +197,13 @@ export const HomeScreenTopBar = () => {
   );
 };
 
-export const HomeScreen = ({navigation}) => {
+export const HomeScreen = ({ navigation }) => {
   // const navigateDetails = () => {
   //   navigation.navigate('Details');
   // };
 
   const dispatch = useDispatch();
-  const {games, offset, total_games} = useSelector(state => state.store);
+  const { games, offset, total_games } = useSelector(state => state.store);
 
   const theme = useTheme();
   const [referral, setReferral] = useState('');
@@ -216,7 +216,7 @@ export const HomeScreen = ({navigation}) => {
 
   const getStore = offset => {
     if (offset <= total_games) {
-      console.log(offset);
+      //console.log(offset);
       dispatch(fetchStore(offset));
     }
   };
@@ -228,7 +228,7 @@ export const HomeScreen = ({navigation}) => {
   const HomeScreenHeaderComponent = () => {
     return (
       <ScrollView
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
@@ -301,7 +301,7 @@ export const HomeScreen = ({navigation}) => {
             height={200}
             autoPlayInterval={3000}
             data={games}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View
                 style={{
                   padding: 10,
@@ -339,7 +339,7 @@ export const HomeScreen = ({navigation}) => {
   const numColumns = Math.ceil(games.length / 2);
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
+      style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
       <TopNavigation
         accessoryRight={<HomeScreenContainer navigation={navigation} />}
       />
@@ -350,15 +350,15 @@ export const HomeScreen = ({navigation}) => {
         data={games}
         initialNumToRender={4}
         keyExtractor={(item, index) => item.id}
-        renderItem={({item, index}) => (
-          <View style={{flex: 1, alignItems: 'center', padding: 10}}>
+        renderItem={({ item, index }) => (
+          <View style={{ flex: 1, alignItems: 'center', padding: 10 }}>
             <GameItem data={item} key={index} />
           </View>
         )}
         numColumns={2}
         ListHeaderComponent={HomeScreenHeaderComponent}
-        // onEndReached={() => getOffers(offset)}
-        // onEndReachedThreshold={0.1}
+      // onEndReached={() => getOffers(offset)}
+      // onEndReachedThreshold={0.1}
       />
     </SafeAreaView>
   );
@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
   },
   textWithShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
   giftHalo: {

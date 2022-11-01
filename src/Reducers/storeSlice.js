@@ -1,9 +1,9 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {_getStoreGames} from '../api/storeService';
-import {getUser} from './authSlice';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { _getGameDetails, _getStoreGames } from '../api/storeService';
+import { getUser } from './authSlice';
 export const fetchStore = createAsyncThunk(
   'store/fetchStore',
-  async (offset, {rejectWithValue}) => {
+  async (offset, { rejectWithValue }) => {
     try {
       // const user = await getUser();
 
@@ -21,11 +21,29 @@ export const fetchStore = createAsyncThunk(
   },
 );
 
+export const getGameDetails = createAsyncThunk(
+  'store/getGameDetails',
+  async (id, { rejectWithValue }) => {
+    try {
+      // const user = await getUser();
+
+      const response = await _getGameDetails(id);
+      if (response.msg) {
+        throw response;
+      }
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const storeSlice = createSlice({
   name: 'store',
   initialState: {
     games: [],
     total_games: 0,
+    game_detail: {},
     offset: 0,
     status: 'idle',
     errors: {},
@@ -49,7 +67,18 @@ const storeSlice = createSlice({
       })
       .addCase(fetchStore.rejected, (state, action) => {
         state.errors = action.payload;
-      });
+      })
+      .addCase(getGameDetails.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getGameDetails.fulfilled, (state, action) => {
+
+        state.game_detail = action.payload;
+
+      })
+      .addCase(getGameDetails.rejected, (state, action) => {
+        state.errors = action.payload;
+      })
   },
 });
 
