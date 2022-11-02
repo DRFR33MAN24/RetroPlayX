@@ -59,6 +59,7 @@ import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {fetchStore} from '../Reducers/storeSlice';
+import {loadGames} from '../Reducers/myGamesSlice';
 import {fetchNotifications} from '../Reducers/notificationSlice';
 import {reloadUser} from '../Reducers/authSlice';
 //import {games} from '../fakeJsonData';
@@ -224,6 +225,7 @@ export const HomeScreen = ({navigation}) => {
   useEffect(() => {
     // api call
     getStore(0);
+    dispatch(loadGames());
   }, []);
 
   const HomeScreenHeaderComponent = () => {
