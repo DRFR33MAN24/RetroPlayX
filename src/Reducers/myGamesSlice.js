@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import * as RNFS from 'react-native-fs';
+import {_getMyGames} from '../api/myGameService';
+
 //import {_getNotifications} from '../api/notificationService';
 import {getUser} from './authSlice';
 
@@ -7,9 +8,8 @@ export const loadGames = createAsyncThunk(
   'downloads/loadGames',
   async (arg, {rejectWithValue}) => {
     try {
-      const files = await RNFS.readDir(RNFS.DocumentDirectoryPath);
-      console.log(files);
-      return files;
+      const games = await _getMyGames();
+      return games;
     } catch (error) {
       return rejectWithValue(error);
     }

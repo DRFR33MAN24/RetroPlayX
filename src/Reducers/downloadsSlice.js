@@ -1,15 +1,17 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import RNBackgroundDownloader from 'react-native-background-downloader';
+import {getFileNameAndExtension} from '../utility';
 //import {_getNotifications} from '../api/notificationService';
 import {getUser} from './authSlice';
 export const startDownload = createAsyncThunk(
   'downloads/startDownload',
   async (game, {rejectWithValue}) => {
     try {
+      const gameFile = getFileNameAndExtension(game.rom_link);
       let task = RNBackgroundDownloader.download({
-        id: game.id,
+        id: gameFile.fileName,
         url: game.rom_link,
-        destination: `${RNBackgroundDownloader.directories.documents}/${game.id}`,
+        destination: `${RNBackgroundDownloader.directories.documents}/${game.id}.${gameFile.extention}`,
       })
         .begin(expectedBytes => {
           console.log(`Going to download ${expectedBytes} bytes!`);
