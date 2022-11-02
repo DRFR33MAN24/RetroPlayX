@@ -119,51 +119,51 @@ export const GameDetails = ({navigation, route}) => {
           resizeMode="stretch"
           style={{width: '100%', height: 200, marginVertical: appStyles.s12}}
         /> */}
-        <GestureHandlerRootView>
-          <Carousel
-            // mode="horizontal-stack"
-            // modeConfig={{
-            //   snapDirection: 'left',
-            //   stackInterval: 18,
-            // }}
-            mode="parallax"
-            modeConfig={{
-              parallaxScrollingScale: 1,
-              parallaxScrollingOffset: 120,
-              parallaxAdjacentItemScale: 0.6,
-            }}
-            autoPlay={true}
-            width={Dimensions.get('screen').width}
-            height={250}
-            style={{marginVertical: appStyles.s12}}
-            autoPlayInterval={3000}
-            data={game_screen_shots.map(obj => obj.image)}
-            renderItem={({item, index}) => (
-              <View
+
+        <Carousel
+          // mode="horizontal-stack"
+          // modeConfig={{
+          //   snapDirection: 'left',
+          //   stackInterval: 18,
+          // }}
+          mode="parallax"
+          modeConfig={{
+            parallaxScrollingScale: 1,
+            parallaxScrollingOffset: 120,
+            parallaxAdjacentItemScale: 0.6,
+          }}
+          autoPlay={true}
+          width={Dimensions.get('screen').width}
+          height={250}
+          style={{marginVertical: appStyles.s12}}
+          autoPlayInterval={3000}
+          data={game_screen_shots.map(obj => obj.image)}
+          renderItem={({item, index}) => (
+            <View
+              style={{
+                padding: 0,
+                margin: 0,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                height: 200,
+              }}>
+              <Image
+                key={index}
+                source={{uri: item}}
+                resizeMode="cover"
                 style={{
-                  padding: 0,
-                  margin: 0,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '100%',
+                  width: '80%',
                   height: 200,
-                }}>
-                <Image
-                  key={index}
-                  source={{uri: item}}
-                  resizeMode="cover"
-                  style={{
-                    width: '80%',
-                    height: 200,
-                    marginVertical: appStyles.s12,
-                    borderRadius: appStyles.s6,
-                  }}
-                />
-              </View>
-            )}
-          />
-        </GestureHandlerRootView>
+                  marginVertical: appStyles.s12,
+                  borderRadius: appStyles.s6,
+                }}
+              />
+            </View>
+          )}
+        />
+
         {game_trailer.results?.[0]?.data[480] ? (
           <View>
             <Text>Game trailer</Text>

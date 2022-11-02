@@ -17,6 +17,7 @@ import AuthScreen from './AuthScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadUser, reloadUser, setDeviceToken} from '../Reducers/authSlice';
 import {Notifications} from 'react-native-notifications';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -35,7 +36,7 @@ const StackNavigatorHome = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Store"
-      component={HomeScreen}
+      component={gestureHandlerRootHOC(HomeScreen)}
       options={{
         headerShown: false,
         // headerRight: props => <HomeScreenTopBar {...props} />,
@@ -43,12 +44,12 @@ const StackNavigatorHome = () => (
     />
     <Stack.Screen
       name="Notification"
-      component={NotificationScreen}
+      component={gestureHandlerRootHOC(NotificationScreen)}
       options={{headerShown: false}}
     />
     <Stack.Screen
       name="GameDetails"
-      component={GameDetails}
+      component={gestureHandlerRootHOC(GameDetails)}
       options={{headerShown: false}}
     />
     <Stack.Screen
@@ -94,7 +95,7 @@ const TabNavigator = () => (
     <Screen
       name="Profile"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
-      component={ProfileScreen}
+      component={gestureHandlerRootHOC(ProfileScreen)}
       options={{
         headerShown: false,
         headerRight: props => <ProfileScreenTopBar {...props} />,
