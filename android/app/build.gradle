@@ -271,6 +271,7 @@ dependencies {
 
 	implementation "com.github.Swordfish90:LibretroDroid:0.8.1"
     implementation "com.github.Swordfish90:radialgamepad:08d1dd95"
+implementation project(':react-native-fs')
 
         implementation project(':react-native-notifications')
     implementation 'com.google.firebase:firebase-core:16.0.0'
