@@ -159,7 +159,7 @@ const downloadsSlice = createSlice({
         //state.downloads = action.payload;
         state.status = 'idle';
       })
-      .addCase(loadDownloads.rejected, (state, action) => {
+      .addCase(stopDownload.rejected, (state, action) => {
         state.errors = action.payload;
       })
       .addCase(loadDownloads.pending, (state, action) => {

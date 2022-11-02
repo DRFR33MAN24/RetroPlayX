@@ -119,7 +119,7 @@ export const GameDetails = ({navigation, route}) => {
           onPress={() =>
             dispatch(
               startDownload({
-                id: 1,
+                id: '1',
                 rom_link: 'https://proof.ovh.net/files/1Mb.dat',
               }),
             )
