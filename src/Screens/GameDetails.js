@@ -21,7 +21,8 @@ import {
   getGameScreenshots,
   getGameTrailer,
 } from '../Reducers/storeSlice';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {startDownload} from '../Reducers/downloadsSlice';
+
 import Video from 'react-native-video';
 
 const regexForStripHTML = /<sup.*>.*?<\/sup>/gi;
@@ -113,7 +114,18 @@ export const GameDetails = ({navigation, route}) => {
             <Text appearance="hint">{'NES'}</Text>
           </View>
         </View>
-        <Button size="small">Install</Button>
+        <Button
+          size="small"
+          onPress={() =>
+            dispatch(
+              startDownload({
+                id: 1,
+                rom_link: 'https://proof.ovh.net/files/1Mb.dat',
+              }),
+            )
+          }>
+          Install
+        </Button>
         {/* <Image
           source={{uri: image}}
           resizeMode="stretch"

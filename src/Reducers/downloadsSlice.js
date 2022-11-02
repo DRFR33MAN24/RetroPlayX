@@ -1,47 +1,46 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import RNBackgroundDownloader from 'react-native-background-downloader';
 //import {_getNotifications} from '../api/notificationService';
-import { getUser } from './authSlice';
+import {getUser} from './authSlice';
 export const startDownload = createAsyncThunk(
   'downloads/startDownload',
-  async (game, { rejectWithValue }) => {
-
+  async (game, {rejectWithValue}) => {
     try {
-
       let task = RNBackgroundDownloader.download({
         id: game.id,
         url: game.rom_link,
-        destination: `${RNBackgroundDownloader.directories.documents}/${game.id}`
-      }).begin((expectedBytes) => {
-        console.log(`Going to download ${expectedBytes} bytes!`);
-        //setStatus()
-      }).progress((percent) => {
-        console.log(`Downloaded: ${percent * 100}%`);
-        //setProgress()
-      }).done(() => {
-        console.log('Download is done!');
-        //setStatus()
-      }).error((error) => {
-        console.log('Download canceled due to error: ', error);
-        //setError()
-      });
+        destination: `${RNBackgroundDownloader.directories.documents}/${game.id}`,
+      })
+        .begin(expectedBytes => {
+          console.log(`Going to download ${expectedBytes} bytes!`);
+          //setStatus()
+        })
+        .progress(percent => {
+          console.log(`Downloaded: ${percent * 100}%`);
+          //setProgress()
+        })
+        .done(() => {
+          console.log('Download is done!');
+          //setStatus()
+        })
+        .error(error => {
+          console.log('Download canceled due to error: ', error);
+          //setError()
+        });
 
       return {
         game_id: game.id,
-        task_id: task.id
-      }
+        task_id: task.id,
+      };
     } catch (error) {
       return rejectWithValue(error);
     }
-
   },
 );
 export const pauseDownload = createAsyncThunk(
   'downloads/pauseDownload',
-  async (game, { rejectWithValue }) => {
-
+  async (game, {rejectWithValue}) => {
     try {
-
       let task = await RNBackgroundDownloader.checkForExistingDownloads();
       if (task[0].id) {
         task[0].pause();
@@ -50,15 +49,12 @@ export const pauseDownload = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-
   },
 );
 export const resumeDownload = createAsyncThunk(
   'downloads/resumeDownload',
-  async (game, { rejectWithValue }) => {
-
+  async (game, {rejectWithValue}) => {
     try {
-
       let task = await RNBackgroundDownloader.checkForExistingDownloads();
       if (task[0].id) {
         task[0].resume();
@@ -67,15 +63,12 @@ export const resumeDownload = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-
   },
 );
 export const stopDownload = createAsyncThunk(
   'downloads/stopDownload',
-  async (game, { rejectWithValue }) => {
-
+  async (game, {rejectWithValue}) => {
     try {
-
       let task = await RNBackgroundDownloader.checkForExistingDownloads();
       if (task[0].id) {
         task[0].stop();
@@ -84,41 +77,40 @@ export const stopDownload = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-
   },
 );
 export const loadDownloads = createAsyncThunk(
   'downloads/loadDownloads',
-  async (game, { rejectWithValue }) => {
-
+  async (game, {rejectWithValue}) => {
     try {
-
       let task = await RNBackgroundDownloader.checkForExistingDownloads();
       if (task) {
-        task.progress((percent) => {
-          console.log(`Downloaded: ${percent * 100}%`);
-        }).done(() => {
-          console.log('Downlaod is done!');
-        }).error((error) => {
-          console.log('Download canceled due to error: ', error);
-        });
+        task
+          .progress(percent => {
+            console.log(`Downloaded: ${percent * 100}%`);
+          })
+          .done(() => {
+            console.log('Downlaod is done!');
+          })
+          .error(error => {
+            console.log('Download canceled due to error: ', error);
+          });
       }
       return {
         game_id: game.id,
-        task_id: task.id
+        task_id: task.id,
       };
     } catch (error) {
       return rejectWithValue(error);
     }
-
   },
 );
 const downloadsSlice = createSlice({
   name: 'downloads',
   initialState: {
     downloads: {},
-    progress: "",
-    status: "idle",
+    progress: '',
+    status: 'idle',
     errors: {},
   },
   reducers: {
@@ -136,7 +128,6 @@ const downloadsSlice = createSlice({
       })
       .addCase(startDownload.fulfilled, (state, action) => {
         state.downloads = action.payload;
-
       })
       .addCase(startDownload.rejected, (state, action) => {
         state.errors = action.payload;
@@ -146,9 +137,7 @@ const downloadsSlice = createSlice({
       })
       .addCase(pauseDownload.fulfilled, (state, action) => {
         //state.downloads = action.payload;
-        state.status = "paused";
-
-
+        state.status = 'paused';
       })
       .addCase(pauseDownload.rejected, (state, action) => {
         state.errors = action.payload;
@@ -158,9 +147,7 @@ const downloadsSlice = createSlice({
       })
       .addCase(resumeDownload.fulfilled, (state, action) => {
         //state.downloads = action.payload;
-        state.status = "downloading";
-
-
+        state.status = 'downloading';
       })
       .addCase(resumeDownload.rejected, (state, action) => {
         state.errors = action.payload;
@@ -170,25 +157,21 @@ const downloadsSlice = createSlice({
       })
       .addCase(stopDownload.fulfilled, (state, action) => {
         //state.downloads = action.payload;
-        state.status = "idle";
-
-
+        state.status = 'idle';
       })
       .addCase(loadDownloads.rejected, (state, action) => {
         state.errors = action.payload;
       })
-      .addCase(stopDownload.pending, (state, action) => {
+      .addCase(loadDownloads.pending, (state, action) => {
         state.status = 'loading';
       })
       .addCase(loadDownloads.fulfilled, (state, action) => {
         state.downloads = action.payload;
-        state.status = "idle";
-
-
+        state.status = 'idle';
       })
       .addCase(loadDownloads.rejected, (state, action) => {
         state.errors = action.payload;
-      })
+      });
   },
 });
 
