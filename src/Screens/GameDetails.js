@@ -16,7 +16,11 @@ import Carousel from 'react-native-reanimated-carousel';
 import {appStyles} from '../Constants/style';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {getGameDetails, getGameScreenshots} from '../Reducers/storeSlice';
+import {
+  getGameDetails,
+  getGameScreenshots,
+  getGameTrailer,
+} from '../Reducers/storeSlice';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 
@@ -32,8 +36,9 @@ export const GameDetails = ({navigation, route}) => {
   const {id} = route.params;
 
   useEffect(() => {
-    dispatch(getGameDetails(3498));
-    dispatch(getGameScreenshots(3498));
+    dispatch(getGameDetails(id));
+    dispatch(getGameScreenshots(id));
+    dispatch(getGameTrailer(id));
   }, []);
   const VerticalDivider = () => (
     <View
@@ -43,8 +48,7 @@ export const GameDetails = ({navigation, route}) => {
         borderColor: theme['text-hint-color'],
       }}></View>
   );
-  console.log(game_detail.rating);
-  //console.log(game_trailer.data[480]);
+
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: theme['background-basic-color-4']}}>
@@ -71,10 +75,9 @@ export const GameDetails = ({navigation, route}) => {
               marginHorizontal: appStyles.s6,
             }}
           />
-          <View>
-            <Text category="h5" numberOfLines={3}>
-              {game_detail.name}
-            </Text>
+          <View style={{width: '60%'}}>
+            <Text category="h5">{game_detail.name}</Text>
+
             <Text appearance="hint" category="label">
               {10} MB
             </Text>
@@ -161,26 +164,28 @@ export const GameDetails = ({navigation, route}) => {
             )}
           />
         </GestureHandlerRootView>
-        <Text>Game trailer</Text>
-        {game_trailer.results ? (
-          <View style={{width: '100%', height: 240}}>
-            <Video
-              source={{uri: game_trailer.results[0].data[480]}} // Can be a URL or a local file.
-              ref={ref => {
-                player = ref;
-              }}
-              resizeMode="stretch"
-              paused={true}
-              controls={true}
-              useTextureView={false}
-              poster={game_trailer.results[0].preview}
-              //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
-              //  onError={this.videoError}               // Callback when video cannot be loaded
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-            />
+        {game_trailer.results?.[0]?.data[480] ? (
+          <View>
+            <Text>Game trailer</Text>
+            <View style={{width: '100%', height: 240}}>
+              <Video
+                source={{uri: game_trailer.results[0].data[480]}} // Can be a URL or a local file.
+                ref={ref => {
+                  player = ref;
+                }}
+                resizeMode="stretch"
+                paused={true}
+                controls={true}
+                useTextureView={false}
+                poster={game_trailer.results[0]?.preview}
+                //  onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                //  onError={this.videoError}               // Callback when video cannot be loaded
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </View>
           </View>
         ) : null}
         <View style={{paddingHorizontal: 10}}>
@@ -189,9 +194,13 @@ export const GameDetails = ({navigation, route}) => {
             {game_detail.description_raw}
           </Text>
           <Text>Geners</Text>
-          {game_detail.genres?.map(obj => (
-            <Text>{obj.name}</Text>
-          ))}
+          <View style={{marginBottom: appStyles.s30}}>
+            {game_detail.genres?.map((obj, index) => (
+              <Text key={index} style={{marginHorizontal: appStyles.s6}}>
+                {obj.name}
+              </Text>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

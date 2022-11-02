@@ -66,6 +66,7 @@ export const getGameTrailer = createAsyncThunk(
       // const user = await getUser();
 
       const response = await _getGameTrailer(id);
+
       if (response.msg) {
         throw response;
       }
