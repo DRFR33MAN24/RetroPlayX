@@ -1,3 +1,3 @@
 import {requireNativeComponent} from 'react-native';
 
-export const MyGameViewManager = requireNativeComponent('MyGameViewManager');
+export const MyGameViewManager = requireNativeComponent('RNGameManager');
