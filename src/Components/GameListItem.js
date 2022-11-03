@@ -2,8 +2,11 @@ import React from 'react';
 import {View, Image} from 'react-native';
 import {Button, Card, Text} from '@ui-kitten/components';
 import {appStyles} from '../Constants/style';
+import {useNavigation} from '@react-navigation/native';
+
 function GameListItem({data}) {
-  const {name, image, platform} = data;
+  const navigaion = useNavigation();
+  const {id, name, image, platform} = data;
   return (
     <Card>
       <View
@@ -30,7 +33,11 @@ function GameListItem({data}) {
             {platform}
           </Text>
         </View>
-        <Button size="small">Play</Button>
+        <Button
+          size="small"
+          onPress={() => navigaion.navigate('GameView', {id, name, platform})}>
+          Play
+        </Button>
       </View>
     </Card>
   );

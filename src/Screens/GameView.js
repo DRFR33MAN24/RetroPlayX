@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, View, Image, Dimensions } from 'react-native';
-import {
+import React, {useEffect, useRef, useState} from 'react';
+import {PixelRatio, UIManager, findNodeHandle} from 'react-native';
+import {MyViewManager} from './my-view-manager';
 
-    useTheme,
-} from '@ui-kitten/components';
+const createFragment = viewId =>
+  UIManager.dispatchViewManagerCommand(
+    viewId,
+    // we are calling the 'create' command
+    UIManager.MyViewManager.Commands.create.toString(),
+    [viewId],
+  );
+export const GameView = ({navigation, route}) => {
+  const ref = useRef(null);
 
+  const {name, platform, id} = route.params;
 
-
-
-export const GameView = ({ navigation, route }) => {
-
-    const theme = useTheme();
-
-    const {
-        gameROMPath,
-        corePath
-    } = route.params;
-
-    // useEffect(() => {
-    //   // api call
-    //   setSurveys(surveysData);
-    //   //console.log(surveyData);
-    // }, []);
-    return (
-        <SafeAreaView
-            style={{ flex: 1, backgroundColor: theme['background-basic-color-4'] }}>
-
-        </SafeAreaView>
-    );
+  useEffect(() => {
+    const viewId = findNodeHandle(ref.current);
+    createFragment(viewId);
+  }, []);
+  return (
+    <MyViewManager
+      style={{
+        // converts dpi to px, provide desired height
+        height: PixelRatio.getPixelSizeForLayoutSize(200),
+        // converts dpi to px, provide desired width
+        width: PixelRatio.getPixelSizeForLayoutSize(200),
+      }}
+      ref={ref}
+    />
+  );
 };

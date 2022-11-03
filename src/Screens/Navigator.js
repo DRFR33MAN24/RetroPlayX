@@ -52,11 +52,6 @@ const StackNavigatorHome = () => (
       component={gestureHandlerRootHOC(GameDetails)}
       options={{headerShown: false}}
     />
-    <Stack.Screen
-      name="GameView"
-      component={GameView}
-      options={{headerShown: false}}
-    />
   </Stack.Navigator>
 );
 const StackNavigatorMyGames = () => (
@@ -68,8 +63,8 @@ const StackNavigatorMyGames = () => (
     />
 
     <Stack.Screen
-      name="Withdraw"
-      component={WithdrawScreen}
+      name="GameView"
+      component={GameView}
       options={{headerShown: false}}
     />
   </Stack.Navigator>
