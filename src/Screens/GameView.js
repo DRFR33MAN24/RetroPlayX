@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {PixelRatio, UIManager, findNodeHandle} from 'react-native';
-import {MyViewManager} from './my-view-manager';
+import {MyGameViewManager} from './MyGameViewManager';
 
 const createFragment = viewId =>
   UIManager.dispatchViewManagerCommand(
     viewId,
     // we are calling the 'create' command
-    UIManager.MyViewManager.Commands.create.toString(),
+    UIManager.MyGameViewManager.Commands.create.toString(),
     [viewId],
   );
 export const GameView = ({navigation, route}) => {
