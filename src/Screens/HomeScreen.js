@@ -34,8 +34,8 @@ import {
   Image,
   Dimensions,
   RefreshControl,
-  FlatList,
 } from 'react-native';
+
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
@@ -54,7 +54,11 @@ import {
 
 import {Congratulation} from '../Components/Congratulation';
 import Carousel from 'react-native-reanimated-carousel';
-import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler';
+import {
+  GestureHandlerRootView,
+  TextInput,
+  FlatList,
+} from 'react-native-gesture-handler';
 
 import {useDispatch, useSelector} from 'react-redux';
 

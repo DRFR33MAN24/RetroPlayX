@@ -8,8 +8,57 @@ export const loadGames = createAsyncThunk(
   'downloads/loadGames',
   async (arg, {rejectWithValue}) => {
     try {
-      const games = await _getMyGames();
-      return games;
+      //const games = await _getMyGames();
+      return [
+        {
+          id: '1',
+          name: 'Super mario Bros',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'NES',
+        },
+        {
+          id: '2',
+          name: 'Contra',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'NES',
+        },
+        {
+          id: '3',
+          name: 'Adventure Island',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'NES',
+        },
+        {
+          id: '4',
+          name: 'GTA 2',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'PS1',
+        },
+        {
+          id: '5',
+          name: 'GTA 2',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'PS1',
+        },
+        {
+          id: '6',
+          name: 'GTA 2',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'PS1',
+        },
+        {
+          id: '7',
+          name: 'GTA 2',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'PS1',
+        },
+        {
+          id: '8',
+          name: 'GTA 2',
+          image: 'https://picsum.photos/id/1/200',
+          platform: 'PS1',
+        },
+      ];
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -18,7 +67,7 @@ export const loadGames = createAsyncThunk(
 const myGames = createSlice({
   name: 'myGames',
   initialState: {
-    myGames: {},
+    myGames: [],
 
     status: 'idle',
     errors: {},

@@ -8,7 +8,7 @@ import {StyleSheet} from 'react-native';
 import {NotificationScreen} from './NotificationScreen';
 
 import {HomeScreen, HomeScreenTopBar, homeIcon} from './HomeScreen';
-import {WalletScreen, walletIcon, WalletScreenTopBar} from './WalletScreen';
+import {MyGamesScreen, MyGamesScreenTobBar, gamepadIcon} from './MyGamesScreen';
 import {ProfileScreen, profileIcon, ProfileScreenTopBar} from './ProfileScreen';
 import {GameDetails} from './GameDetails';
 import {GameView} from './GameView';
@@ -27,7 +27,7 @@ const BottomTabBar = ({navigation, state}) => (
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
     <BottomNavigationTab title="Store" icon={homeIcon} />
-    <BottomNavigationTab title="Play" icon={walletIcon} />
+    <BottomNavigationTab title="Play" icon={gamepadIcon} />
     <BottomNavigationTab title="Profile" icon={profileIcon} />
   </BottomNavigation>
 );
@@ -59,11 +59,11 @@ const StackNavigatorHome = () => (
     />
   </Stack.Navigator>
 );
-const StackNavigatorWallet = () => (
+const StackNavigatorMyGames = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Play"
-      component={WalletScreen}
+      component={gestureHandlerRootHOC(MyGamesScreen)}
       options={{headerShown: false}}
     />
 
@@ -86,10 +86,10 @@ const TabNavigator = () => (
     <Screen
       name="PlayTab"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
-      component={StackNavigatorWallet}
+      component={StackNavigatorMyGames}
       options={{
         headerShown: false,
-        headerRight: props => <WalletScreenTopBar {...props} />,
+        headerRight: props => <MyGamesScreenTobBar {...props} />,
       }}
     />
     <Screen
