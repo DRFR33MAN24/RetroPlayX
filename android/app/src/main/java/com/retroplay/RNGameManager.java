@@ -82,11 +82,13 @@ public class RNGameManager extends ViewGroupManager<FrameLayout> {
     public void receiveCommand(@NonNull FrameLayout root, String commandId, @Nullable ReadableArray args) {
         super.receiveCommand(root, commandId, args);
         int reactNativeViewId = args.getInt(0);
+	 string romID = args.getString(1);
+	 string coreName = args.getString(2);
         int commandIdInt = Integer.parseInt(commandId);
 
         switch (commandIdInt) {
             case COMMAND_CREATE:
-                createFragment(root, reactNativeViewId);
+                createFragment(root, reactNativeViewId,romID,coreName);
                 break;
             default: {
             }
@@ -107,11 +109,11 @@ public class RNGameManager extends ViewGroupManager<FrameLayout> {
     /**
      * Replace your React Native view with a custom fragment
      */
-    public void createFragment(FrameLayout root, int reactNativeViewId) {
+    public void createFragment(FrameLayout root, int reactNativeViewId,romID,coreName) {
         ViewGroup parentView = (ViewGroup) root.findViewById(reactNativeViewId);
         setupLayout(parentView);
 
-        final GameFragment gameFragment = new GameFragment();
+        final GameFragment gameFragment = new GameFragment(romID,coreName);
         FragmentActivity activity = (FragmentActivity) mCallerContext.getCurrentActivity();
         activity.getSupportFragmentManager()
                 .beginTransaction()

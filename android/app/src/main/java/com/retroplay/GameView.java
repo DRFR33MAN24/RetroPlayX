@@ -10,7 +10,7 @@ import com.swordfish.libretrodroid.GLRetroViewData;
 
 public class GameView extends FrameLayout {
     GLRetroViewData data;
-    public GameView(Context context, Lifecycle lifecycle){
+    public GameView(Context context, Lifecycle lifecycle,String romName,String coreName){
         super(context);
 
         data = new GLRetroViewData(context);

@@ -17,17 +17,20 @@ public class GameFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+/*     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2"; */
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String coreName;
+    private String romID;
 
     GameView gameView;
 
-    public GameFragment() {
+    public GameFragment(String romID,String coreName) {
         // Required empty public constructor
+	 this.romID = romID;
+	 this.coreName=coreName;
+	 
     }
 
 //    /**
@@ -51,10 +54,10 @@ public class GameFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+/*         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        } */
     }
 
     @Override
@@ -63,7 +66,7 @@ public class GameFragment extends Fragment {
         super.onCreateView(inflater,container,savedInstanceState);
 
        // FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.other_fragment, null);
-        gameView= new GameView(this.getContext(),this.getLifecycle());
+        gameView= new GameView(this.getContext(),this.getLifecycle(),this.romID,this.coreName);
         return gameView;
 
 
