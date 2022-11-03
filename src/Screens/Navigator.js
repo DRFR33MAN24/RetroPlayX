@@ -65,7 +65,7 @@ const StackNavigatorMyGames = () => (
     <Stack.Screen
       name="GameView"
       component={GameView}
-      options={{headerShown: false}}
+      options={{headerShown: false, orientation: 'landscape'}}
     />
   </Stack.Navigator>
 );
