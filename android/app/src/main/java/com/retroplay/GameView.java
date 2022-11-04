@@ -1,6 +1,7 @@
 package com.retroplay;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.FrameLayout;
 
 import androidx.lifecycle.Lifecycle;
@@ -15,7 +16,7 @@ public class GameView extends FrameLayout {
 
         data = new GLRetroViewData(context);
         data.setCoreFilePath("libmgba_libretro_android.so");
-        data.setGameFilePath(this.getContext().getFilesDir()+ "/example.gba");
+        data.setGameFilePath(this.getContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)+ "/example.gba");
         data.setGameFileBytes(null);
 
         data.setRumbleEventsEnabled(false);

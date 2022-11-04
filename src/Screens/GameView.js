@@ -1,25 +1,25 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {PixelRatio, UIManager, findNodeHandle} from 'react-native';
-import {MyGameViewManager} from './MyGameViewManager';
+import React, { useEffect, useRef, useState } from 'react';
+import { PixelRatio, UIManager, findNodeHandle } from 'react-native';
+import { MyGameViewManager } from './MyGameViewManager';
 
 const createFragment = (viewId, romID, coreName) =>
   UIManager.dispatchViewManagerCommand(
     viewId,
     // we are calling the 'create' command
-    UIManager.MyGameViewManager.Commands.create.toString(),
+    UIManager.RNGameManager.Commands.create.toString(),
     [viewId, romID, coreName],
   );
-export const GameView = ({navigation, route}) => {
+export const GameView = ({ navigation, route }) => {
   const ref = useRef(null);
 
-  const {name, platform, id} = route.params;
+  const { name, platform, id } = route.params;
 
   useEffect(() => {
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId, id, platform);
   }, []);
   return (
-    <MyViewManager
+    <MyGameViewManager
       style={{
         // converts dpi to px, provide desired height
         height: PixelRatio.getPixelSizeForLayoutSize(200),
