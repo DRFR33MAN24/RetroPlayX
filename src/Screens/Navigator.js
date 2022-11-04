@@ -82,10 +82,19 @@ const TabNavigator = () => (
       name="PlayTab"
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={StackNavigatorMyGames}
-      options={{
+      options={({route}) => ({
+        tabBarStyle: (route => {
+          const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+          //console.log(routeName);
+          if (routeName === 'GameView') {
+            return {display: 'none'};
+          }
+          return;
+        })(route),
         headerShown: false,
+
         headerRight: props => <MyGamesScreenTobBar {...props} />,
-      }}
+      })}
     />
     <Screen
       name="Profile"
