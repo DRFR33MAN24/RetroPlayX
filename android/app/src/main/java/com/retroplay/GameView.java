@@ -1,7 +1,11 @@
 package com.retroplay;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.widget.FrameLayout;
 
 import androidx.lifecycle.Lifecycle;
@@ -19,10 +23,17 @@ public class GameView extends FrameLayout {
         data.setGameFilePath(this.getContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)+ "/example.gba");
         data.setGameFileBytes(null);
 
+
         data.setRumbleEventsEnabled(false);
         data.setPreferLowLatencyAudio(true);
        GLRetroView retroView = new GLRetroView(context,data);
+        DisplayMetrics metrics = new DisplayMetrics();
+       context.getDisplay().getMetrics(metrics);
+        retroView.setMinimumHeight(metrics.heightPixels);
+        retroView.setMinimumWidth(metrics.widthPixels);
 
+//        this.layout(0,0,500,500);
+       // this.setBackgroundColor(Color.GREEN);
        lifecycle.addObserver(retroView);
        this.addView(retroView);
 

@@ -148,5 +148,6 @@ public class RNGameManager extends ViewGroupManager<FrameLayout> {
                 View.MeasureSpec.makeMeasureSpec(metrics.getHeight(), View.MeasureSpec.EXACTLY));
 
         view.layout(0, 0,metrics.getWidth() ,metrics.getHeight() );
+        //view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 }
