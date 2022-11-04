@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { PixelRatio, UIManager, findNodeHandle } from 'react-native';
-import { MyGameViewManager } from './MyGameViewManager';
+import React, {useEffect, useRef, useState} from 'react';
+import {PixelRatio, UIManager, findNodeHandle, StatusBar} from 'react-native';
+import {MyGameViewManager} from './MyGameViewManager';
 
 const createFragment = (viewId, romID, coreName) =>
   UIManager.dispatchViewManagerCommand(
@@ -9,14 +9,18 @@ const createFragment = (viewId, romID, coreName) =>
     UIManager.RNGameManager.Commands.create.toString(),
     [viewId, romID, coreName],
   );
-export const GameView = ({ navigation, route }) => {
+export const GameView = ({navigation, route}) => {
   const ref = useRef(null);
 
-  const { name, platform, id } = route.params;
+  const {name, platform, id} = route.params;
 
   useEffect(() => {
+    StatusBar.setHidden(true);
+    navigation.setOptions({tabBarVisible: false});
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId, id, platform);
+
+    return () => StatusBar.setHidden(false);
   }, []);
   return (
     <MyGameViewManager

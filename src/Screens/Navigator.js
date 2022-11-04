@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
@@ -83,14 +87,15 @@ const TabNavigator = () => (
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={StackNavigatorMyGames}
       options={({route}) => ({
-        tabBarStyle: (route => {
-          const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-          //console.log(routeName);
-          if (routeName === 'GameView') {
-            return {display: 'none'};
-          }
-          return;
-        })(route),
+        // tabBarStyle: {display: 'none'},
+        // tabBarStyle: (route => {
+        //   const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+        //   console.log(routeName);
+        //   if (routeName === 'GameView') {
+        //     return {display: 'none'};
+        //   }
+        //   return;
+        // })(route),
         headerShown: false,
 
         headerRight: props => <MyGamesScreenTobBar {...props} />,
