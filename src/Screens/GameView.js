@@ -16,7 +16,7 @@ export const GameView = ({navigation, route}) => {
 
   useEffect(() => {
     StatusBar.setHidden(true);
-    navigation.setOptions({tabBarVisible: false});
+    navigation.setOptions({tabBarStyle: {display: 'none'}});
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId, id, platform);
 
