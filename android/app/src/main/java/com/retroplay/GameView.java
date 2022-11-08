@@ -27,10 +27,11 @@ public class GameView extends FrameLayout {
         data.setRumbleEventsEnabled(false);
         data.setPreferLowLatencyAudio(true);
        GLRetroView retroView = new GLRetroView(context,data);
-        DisplayMetrics metrics = new DisplayMetrics();
-       context.getDisplay().getMetrics(metrics);
-        retroView.setMinimumHeight(metrics.heightPixels);
-        retroView.setMinimumWidth(metrics.widthPixels);
+       retroView.setResizeMode(GLRetroView.RESIZE_MODE_FILL);
+//        DisplayMetrics metrics = new DisplayMetrics();
+//       context.getDisplay().getMetrics(metrics);
+//        retroView.setMinimumHeight(metrics.heightPixels);
+//        retroView.setMinimumWidth(metrics.widthPixels);
 
 //        this.layout(0,0,500,500);
        // this.setBackgroundColor(Color.GREEN);

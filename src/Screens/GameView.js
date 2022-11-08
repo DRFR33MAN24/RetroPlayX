@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {PixelRatio, UIManager, findNodeHandle, StatusBar} from 'react-native';
+import {PixelRatio, UIManager, findNodeHandle, StatusBar,View} from 'react-native';
 import {MyGameViewManager} from './MyGameViewManager';
 
 const createFragment = (viewId, romID, coreName) =>
@@ -23,6 +23,8 @@ export const GameView = ({navigation, route}) => {
     return () => StatusBar.setHidden(false);
   }, []);
   return (
+
+  
     <MyGameViewManager
       style={{
         // converts dpi to px, provide desired height
@@ -32,5 +34,6 @@ export const GameView = ({navigation, route}) => {
       }}
       ref={ref}
     />
+
   );
 };
