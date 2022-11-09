@@ -26,15 +26,17 @@ import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 const {Navigator, Screen} = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabBar = ({navigation, state}) => (
+const BottomTabBar = ({navigation, state}) => {
+
+	return(
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
     <BottomNavigationTab title="Store" icon={homeIcon} />
     <BottomNavigationTab title="Play" icon={gamepadIcon} />
     <BottomNavigationTab title="Profile" icon={profileIcon} />
-  </BottomNavigation>
-);
+  </BottomNavigation>)
+};
 
 const StackNavigatorHome = () => (
   <Stack.Navigator>
@@ -73,13 +75,19 @@ const StackNavigatorMyGames = () => (
     />
   </Stack.Navigator>
 );
-const TabNavigator = () => (
-  <Navigator tabBar={props => <BottomTabBar {...props} />}>
+const TabNavigator = () => {
+	const [tabBarShown,setTabBarShown]= useState(true);
+	return(
+  <Navigator tabBar={props => {
+	  if(tabBarShown)
+	 return( <BottomTabBar {...props} />)
+	  }}>
     <Screen
       name="StoreTab"
       component={StackNavigatorHome}
       options={{
         headerShown: false,
+	  
       }}
     />
     <Screen
@@ -87,15 +95,17 @@ const TabNavigator = () => (
       // options={{headerRight: props => <HomeScreenTopBar {...props} />}}
       component={StackNavigatorMyGames}
       options={({route}) => ({
-        // tabBarStyle: {display: 'none'},
-        // tabBarStyle: (route => {
-        //   const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-        //   console.log(routeName);
-        //   if (routeName === 'GameView') {
-        //     return {display: 'none'};
-        //   }
-        //   return;
-        // })(route),
+        
+        tabBarStyle: (route => {
+          const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+          //console.log(routeName);
+          if (routeName === 'GameView') {
+		   setTabBarShown(false)
+            return {display: 'none'};
+          }
+	   setTabBarShown(true)
+          return;
+        })(route),
         headerShown: false,
 
         headerRight: props => <MyGamesScreenTobBar {...props} />,
@@ -112,7 +122,7 @@ const TabNavigator = () => (
     />
     {/* <Screen name="Settings" component={SettingsScreen} /> */}
   </Navigator>
-);
+)};
 
 export const AppNavigator = () => {
   const auth = useSelector(state => state.auth);
