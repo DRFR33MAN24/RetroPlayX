@@ -7,8 +7,27 @@
     android:background="@color/catalyst_redbox_background"
 
 
+    >
 
-   >
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <FrameLayout
+            android:id="@+id/left_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50.0" />
+
+        <FrameLayout
+            android:id="@+id/right_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </FrameLayout>
 

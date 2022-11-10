@@ -7,10 +7,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-//import com.swordfish.libretrodroid.GLRetroView;
-//import com.swordfish.libretrodroid.GLRetroViewData;
+import android.widget.FrameLayout;
+
+
+import com.swordfish.radialgamepad.library.RadialGamePad;
+import com.swordfish.radialgamepad.library.event.Event;
 
 
 public class GameFragment extends Fragment {
@@ -25,12 +29,14 @@ public class GameFragment extends Fragment {
     private String romID;
 
     GameView gameView;
+    private RadialGamePad leftPad;
+    private RadialGamePad rightPad;
 
-    public GameFragment(String romID,String coreName) {
+    public GameFragment(String romID, String coreName) {
         // Required empty public constructor
-	 this.romID = romID;
-	 this.coreName=coreName;
-	 
+        this.romID = romID;
+        this.coreName = coreName;
+
     }
 
 //    /**
@@ -63,10 +69,11 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-       // FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.other_fragment, null);
-        gameView= new GameView(this.getContext(),this.getLifecycle(),this.romID,this.coreName);
+        // FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.other_fragment, null);
+        gameView = new GameView(this.getContext(), this.getLifecycle(), this.romID, this.coreName);
+        initializeVirtualGamePad();
         return gameView;
 
 
@@ -76,4 +83,29 @@ public class GameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-}
+
+    private void initializeVirtualGamePad() {
+        leftPad = new RadialGamePad(VirtualGamePadConfigs.INSTANCE.getRETRO_PAD_RIGHT(), 8f, this.getContext());
+        rightPad = new RadialGamePad(VirtualGamePadConfigs.INSTANCE.getRETRO_PAD_LEFT(), 8f, this.getContext());
+
+        // We want the pad anchored to the bottom of the screen
+        leftPad.setGravityX(-1f);
+        leftPad.setGravityY(1f);
+
+        rightPad.setGravityX(1f);
+        rightPad.setGravityY(1f);
+        ((FrameLayout) this.getActivity().findViewById(R.id.left_container)).addView(leftPad);
+        ((FrameLayout) this.getActivity().findViewById(R.id.right_container)).addView(rightPad);
+        leftPad.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                
+                return false;
+            }
+        });
+
+
+
+
+    }
+    }

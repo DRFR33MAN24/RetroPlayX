@@ -1,9 +1,14 @@
 package com.retroplay;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+
+import com.retroplay.RNGameManager;
 
 public class MainActivity extends ReactActivity {
 
@@ -43,5 +48,24 @@ public class MainActivity extends ReactActivity {
     @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+    RNGameManager.getInstance().onKeyEventDown(keyCode,event);
+    return super.onKeyDown(keyCode, event);
+  }
+
+  @Override
+  public boolean onKeyUp(int keyCode, KeyEvent event) {
+    RNGameManager.getInstance().onKeyEventUp(keyCode,event);
+    return super.onKeyUp(keyCode, event);
+  }
+
+  @Override
+  public boolean onGenericMotionEvent(MotionEvent event) {
+    RNGameManager.getInstance().onGenericMotionEvent(event);
+    return super.onGenericMotionEvent(event);
   }
 }

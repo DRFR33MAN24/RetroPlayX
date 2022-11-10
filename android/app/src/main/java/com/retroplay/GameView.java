@@ -27,6 +27,7 @@ public class GameView extends FrameLayout {
         data.setRumbleEventsEnabled(false);
         data.setPreferLowLatencyAudio(true);
        GLRetroView retroView = new GLRetroView(context,data);
+       retroView.setId(R.id.gl_retro_view);
        retroView.setResizeMode(GLRetroView.RESIZE_MODE_FILL);
 //        DisplayMetrics metrics = new DisplayMetrics();
 //       context.getDisplay().getMetrics(metrics);
